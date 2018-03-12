@@ -49,20 +49,47 @@ public class SingleLinkedList {
 			if(size==1){
 				rs=head.info;
 				head=tail=new Node(null, null);
-				return rs;
 			}else{
 				Node tmp=head;
-				Node prev=null;
-				while(tmp!=null){
+				Node prev=head;
+				while(tmp.next!=null){
 					prev=tmp;
 					tmp=tmp.next;
 				}
 				rs=tail.info;
+				prev.next=tmp.next;
 				tail=prev;
 			}
 			size--;
+			return rs;
 		}
 		return null;
+	}
+	
+	public void deleteNode(int index){
+		rangeCheck(index);
+		if(size==1){
+			head=tail=new Node(null, null);
+			size--;
+		}else if(size==0){
+			head=head.next;
+			size--;
+		}else if(index==size-1){
+			deleteFromTail();
+		}else{
+			int tmpIndex=0;
+			Node tmpNode=head;
+			Node prevNode=head,nextNode=head;
+			while(tmpIndex!=index){
+				prevNode=tmpNode;
+				tmpNode=tmpNode.next;
+				nextNode=tmpNode;
+				tmpIndex++;
+			}
+			prevNode.next=nextNode.next;
+			size--;
+		}
+		
 	}
 	
 	public int size(){
@@ -74,9 +101,7 @@ public class SingleLinkedList {
 	}
 	
 	public Integer get(int i){
-		if(i<0 || i>=size){
-			throw new ArrayIndexOutOfBoundsException(i);
-		}
+		rangeCheck(i);
 		if(i==0){
 			return head.info;
 		}
@@ -90,6 +115,12 @@ public class SingleLinkedList {
 			tmpIndex++;
 		}
 		return tmpNode.info;
+	}
+
+	private void rangeCheck(int i) {
+		if(i<0 || i>=size){
+			throw new ArrayIndexOutOfBoundsException(i);
+		}
 	}
 }
 
