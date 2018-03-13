@@ -2,7 +2,7 @@ package com.chapter5;
 
 /**
  * <p>CalculateSum</p>  
- * @author yanan  
+ * @author yanan 
  * @date 2018年3月9日
  */
 public class CalculateSum {
