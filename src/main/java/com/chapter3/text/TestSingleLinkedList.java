@@ -4,7 +4,7 @@ public class TestSingleLinkedList {
 	
 	public static void main(String[] args) {
 		SingleLinkedList list=new SingleLinkedList();
-		list.addToHead(1);
+		/*list.addToHead(1);
 		list.addToHead(2);
 		list.addToHead(3);
 		
@@ -12,12 +12,20 @@ public class TestSingleLinkedList {
 		list.deleteFromHead();
 		list.deleteFromHead();
 		list.deleteFromHead();
-		System.out.println(list.isEmpty());
+		System.out.println(list.isEmpty());*/
 		
-		list.addToTail(1);
-		list.addToTail(2);
-		list.addToTail(3);
+		for(int i=1;i<=10;i++){
+			list.addToTail(i);
+		}
+		//list is:1,2,3,4,5,6,7,8,9,10
+		
+		list.deleteNode(2);// list is:1,2,4,5,6,7,8,9,10
+		System.out.println("list is:1,2,4,5,6,7,8,9,10？");
 		printList(list);
+		list.deleteNode(7);// list is:1,2,4,5,6,7,8,10
+		System.out.println("list is:1,2,4,5,6,7,8,10？");
+		printList(list);
+		
 	}
 
 	private static void printList(SingleLinkedList list) {
