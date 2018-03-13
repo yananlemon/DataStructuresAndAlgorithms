@@ -14,12 +14,16 @@ public class TestSingleLinkedList {
 		list.deleteFromHead();
 		System.out.println(list.isEmpty());*/
 		
-		for(int i=1;i<=100;i++){
+		for(int i=1;i<=10;i++){
 			list.addToTail(i);
 		}
-		//printList(list);
+		//list is:1,2,3,4,5,6,7,8,9,10
 		
-		list.deleteNode(2);
+		list.deleteNode(2);// list is:1,2,4,5,6,7,8,9,10
+		System.out.println("list is:1,2,4,5,6,7,8,9,10？");
+		printList(list);
+		list.deleteNode(7);// list is:1,2,4,5,6,7,8,10
+		System.out.println("list is:1,2,4,5,6,7,8,10？");
 		printList(list);
 		
 	}
