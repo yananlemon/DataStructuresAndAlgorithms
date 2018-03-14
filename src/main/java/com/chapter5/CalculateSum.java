@@ -9,15 +9,14 @@ public class CalculateSum {
 
 	public static void main(String[] args) {
 		int start=1;
-		//int end=500000;-Xss1024m
-		int end=500000000;
+		int end=500000;//-Xss1024m
 		long startTime=System.currentTimeMillis();
 		System.out.println(calSumWithIterator(start, end));
 		long endTime=System.currentTimeMillis();
 		System.out.println("使用循环花费"+(endTime-startTime)+"ms.");
 		
 		startTime=System.currentTimeMillis();
-		//System.out.println(calSumWithRecursion(start, end));
+		System.out.println(calSumWithRecursion(start, end));
 		endTime=System.currentTimeMillis();
 		System.out.println("使用递归花费"+(endTime-startTime)+"ms.");
 		
@@ -27,7 +26,12 @@ public class CalculateSum {
 		System.out.println("使用高斯求和公式花费"+(endTime-startTime)+"ms.");
 	}
 	
-	// calculate sum with recursion
+	/**
+	 * 使用递归计算等差数列的和(从start开始，到end结束，每次加1)
+	 * @param start 起始数字
+	 * @param end	结束数字
+	 * @return long 返回结果
+	 */
 	static long calSumWithRecursion(int start,int end){
 		if(start==end){
 			return end;
@@ -36,6 +40,12 @@ public class CalculateSum {
 		}
 	}
 	
+	/**
+	 * 使用循环计算等差数列的和(从start开始，到end结束，每次加1)
+	 * @param start 起始数字
+	 * @param end	结束数字
+	 * @return long 返回结果
+	 */
 	static long calSumWithIterator(int start,int end){
 		int sum=0;
 		for(;start<=end;start++){
@@ -44,6 +54,12 @@ public class CalculateSum {
 		return sum;
 	}
 	
+	/**
+	 * 使用高斯求和公式计算等差数列的和(从start开始，到end结束，每次加1)
+	 * @param start 起始数字
+	 * @param end	结束数字
+	 * @return long 返回结果
+	 */
 	static long calSumWithGauss(long start,long end){
 		return (start+end)*end/2;
 	}
