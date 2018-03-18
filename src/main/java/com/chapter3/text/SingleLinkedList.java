@@ -13,6 +13,11 @@ public class SingleLinkedList {
 		head=tail=new Node(null, null);
 	}
 	
+	public void clear(){
+		head=tail=new Node(null, null);
+		size=0;
+	}
+	
 	/**
 	 * 将数据添加到链表头部
 	 * @param data 待添加的数据

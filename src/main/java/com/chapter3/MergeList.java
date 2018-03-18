@@ -18,10 +18,10 @@ public class MergeList {
 	public static void main(String[] args) {
 		SingleLinkedList list1=new SingleLinkedList();
 		SingleLinkedList list2=new SingleLinkedList();
-		for(int i=1;i<=10;i+=2){
+		for(int i=1;i<=5;i+=2){
 			list1.addToTail(i);
 		}
-		for(int i=2;i<=10;i+=2){
+		for(int i=2;i<=6;i+=2){
 			list2.addToTail(i);
 		}
 		printList(list1);
@@ -48,7 +48,7 @@ public class MergeList {
 	 * 合并两个有序的链表
 	 * @param head1
 	 * @param head2
-	 * @return
+	 * @return 合并后的结果
 	 */
 	static Node mergeList(Node head1,Node head2){
 		if(head1==null){

@@ -13,11 +13,11 @@ public class ReverseSingleLinkedList {
 
 	public static void main(String[] args) {
 		SingleLinkedList list=new SingleLinkedList();
-		for(int i=1;i<=30;i++){
+		for(int i=1;i<=5;i++){
 			list.addToTail(i);
 		}
 		//Node reversed=reverseLinkedList(list.getHead());
-		Node reversed=reverseLinkedList2(list.getHead());
+		Node reversed=reverseLinkedListWithRecursion(list.getHead());
 		Node temp=reversed;
 		while(temp!=null){
 			System.out.println(temp.getInfo());
@@ -30,7 +30,7 @@ public class ReverseSingleLinkedList {
 	 * @param head
 	 * @return
 	 */
-	static Node reverseLinkedList(Node head){
+	static Node reverseLinkedListWithIterator(Node head){
 		if(head==null || head.getNext()==null){
 			return head;
 		}
@@ -52,14 +52,14 @@ public class ReverseSingleLinkedList {
 	 * @param head
 	 * @return
 	 */
-	static Node reverseLinkedList2(Node head){
+	static Node reverseLinkedListWithRecursion(Node head){
 		if(head==null){
 			return null;
 		}
 		if(head.getNext()==null){
 			return head;
 		}
-		Node last=reverseLinkedList2(head.getNext());
+		Node last=reverseLinkedListWithRecursion(head.getNext());
 		head.getNext().setNext(head);
 		head.setNext(null);
 		return last;
