@@ -116,6 +116,25 @@ public class SingleLinkedList {
 		
 	}
 	
+	
+	public void set(int value,int index){
+		rangeCheck(index);
+		if(index==0){
+			head.info=value;
+		}else if(index==size-1){
+			tail.info=value;
+		}else{
+			//1->2->3->4
+			int i=0;
+			Node curr=head;
+			while(i<index){
+				curr=curr.next;
+				i++;
+			}
+			curr.info=value;
+		}
+	}
+	
 	public int size(){
 		return size;
 	}

@@ -27,7 +27,8 @@ public class MergeList {
 		printList(list1);
 		printList(list2);
 		
-		printNode(mergeList(list1.getHead(), list2.getHead()));
+		//printNode(mergeListWithRecursion(list1.getHead(), list2.getHead()));
+		printNode(mergeListWithIterator(list1.getHead(), list2.getHead()));
 	}
 	
 	static void printList(SingleLinkedList list){
@@ -50,7 +51,7 @@ public class MergeList {
 	 * @param head2
 	 * @return 合并后的结果
 	 */
-	static Node mergeList(Node head1,Node head2){
+	static Node mergeListWithRecursion(Node head1,Node head2){
 		if(head1==null){
 			return head2;
 		}
@@ -60,12 +61,48 @@ public class MergeList {
 		Node mergedHead=null;
 		if(head1.getInfo().intValue()<head2.getInfo().intValue()){
 			mergedHead=head1;
-			mergedHead.setNext(mergeList(head1.getNext(), head2));
+			mergedHead.setNext(mergeListWithRecursion(head1.getNext(), head2));
 		}else{
 			mergedHead=head2;
-			mergedHead.setNext(mergeList(head1, head2.getNext()));
+			mergedHead.setNext(mergeListWithRecursion(head1, head2.getNext()));
 		}
 		return mergedHead;
+	}
+	
+	/**
+	 * 1->3->5
+	 * 2->4->6
+	 * @param head1
+	 * @param head2
+	 * @return
+	 */
+	static Node mergeListWithIterator(Node head1,Node head2){
+		Node result=null;
+		Node temp=null;
+		Node temp1=head1,temp2=head2;
+		if(head1.getInfo().intValue()<head2.getInfo().intValue()){
+			result=head1;
+			temp1=head1.getNext();
+		}else{
+			result=head2;
+			temp2=head2.getNext();
+		}
+		result.setNext(temp);
+		
+		while(temp1!=null && temp2!=null){
+			if(temp1.getInfo().intValue()<temp2.getInfo().intValue()){
+				temp=temp1;
+				temp=temp1.getNext();
+				temp1=temp1.getNext();
+			}else{
+				temp=temp2;
+				temp=temp2.getNext();
+				temp2=temp2.getNext();
+			}
+			//
+			//temp=temp.getNext();
+		}
+		return result;
 	}
 
 }
