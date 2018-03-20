@@ -43,7 +43,8 @@ public class SingleLinkedList {
 		}else{
 			Node newNode=new Node(data, null);
 			tail.next=newNode;
-			tail=tail.next;
+			//tail=tail.next;
+			tail=newNode;//同tail=tail.next;效果一致
 		}
 		size++;
 	}
