@@ -19,7 +19,7 @@ public class TestIntSingleCircularLinkedList {
 		iscl.deleteFromTail();
 		iscl.deleteFromTail();
 		print(iscl);//list is : 1,2,3,4,5,6,7,8?
-		*/		
+		*/	
 		
 		for(int i=1;i<=10;i++){
 			iscl.addToTail(i);
@@ -27,7 +27,7 @@ public class TestIntSingleCircularLinkedList {
 		iscl.deleteNode(8);
 		print(iscl);//list is : 1,2,3,4,5,6,7,8,10?
 		iscl.deleteNode(5);
-		print(iscl);//list is : 1,2,3,4,5,7,8,10?
+		print(iscl);//list is : 1,2,3,4,5,7,8,10?*/	
 	}
 	
 	static void print(IntSingleCircularLinkedList iscl){

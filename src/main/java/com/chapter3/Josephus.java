@@ -13,8 +13,10 @@ import com.chapter3.text.Node;
 public class Josephus {
 
 	public static void main(String[] args) {
-		System.out.println(josephus(11, 3));
-		System.out.println(josephusWithCircularLinkedList(11, 3));
+		int n=41;
+		int m=3;
+		System.out.println(josephus(n, m));
+		System.out.printf("最后活下来的人的编号是：%d",josephusWithCircularLinkedList(n, m));
 	}
 	
 	/**
@@ -40,6 +42,8 @@ public class Josephus {
 			list.deleteNode(m-1);
 			list=buildNewList(list,m-1);
 		}
+		System.out.printf("留下的两个人是：%d,%d\n", list.get(0),list.get(1));
+		
 		if((m&1)==1){//如果m是奇数,那么活下来的人的编号是
 			return list.get(1);
 		}

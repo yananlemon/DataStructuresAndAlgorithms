@@ -29,6 +29,8 @@ public class IntSingleCircularLinkedList {
 		Node newNode=new Node(data, head);
 		if(isEmpty()){
 			head=tail=newNode;
+			head.setNext(tail);
+			tail.setNext(head);
 		}else{
 			tail.setNext(newNode);
 			head=newNode;
@@ -41,9 +43,11 @@ public class IntSingleCircularLinkedList {
 	 * @param data 待添加的数据
 	 */
 	public void addToTail(Integer data){
-		Node newNode=new Node(data, null);
+		Node newNode=new Node(data, head);
 		if(isEmpty()){
-			head=tail=new Node(data, null);
+			head=tail=newNode;
+			head.setNext(tail);
+			tail.setNext(head);
 		}else{
 			tail.setNext(newNode);
 			newNode.setNext(head);
@@ -57,9 +61,6 @@ public class IntSingleCircularLinkedList {
 	 * @param index 数据位于链表中的索引
 	 */
 	public void deleteNode(int index){
-		if(index>=size){
-			System.out.println("...................");
-		}
 		rangeCheck(index);
 		if(index==0){
 			deleteFromHead();
