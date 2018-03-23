@@ -34,17 +34,21 @@ public class Josephus {
 	
 	static int josephusWithCircularLinkedList(int n,int m){
 		IntSingleCircularLinkedList list=new IntSingleCircularLinkedList();
+		
 		// 1.创建约瑟夫环
 		for (int i = 1; i <= n; i++) {
 			list.addToTail(i);
 		}
+		
+		// 2.循环删除第m个元素，直到剩下两个人。
 		while(list.size()!=2){
 			list.deleteNode(m-1);
 			list=buildNewList(list,m-1);
 		}
 		System.out.printf("留下的两个人是：%d,%d\n", list.get(0),list.get(1));
 		
-		if((m&1)==1){//如果m是奇数,那么活下来的人的编号是
+		//如果m是奇数,那么活下来的人的就是list中第二个元素
+		if((m&1)==1){
 			return list.get(1);
 		}
 		return list.get(0);
