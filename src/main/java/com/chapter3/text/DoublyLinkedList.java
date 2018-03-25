@@ -71,6 +71,29 @@ public class DoublyLinkedList<T> {
 	}
 	
 	/**
+	 * 将数据添加到链表正中间(3.10习题第16题)
+	 * @param data 待添加的数据
+	 */
+	public void addToMiddle(T data){
+		DNode<T> newNode = new DNode<T>(data, null, null);
+		if(isEmpty()){
+			head=tail=newNode;
+		}else{
+			int index=(size()>>1)-1;
+			DNode<T> temp=head;
+			while(index>0){
+				temp=temp.next;
+				index--;
+			}
+			newNode.next=temp.next;
+			temp.next.prev=newNode;
+			temp.next=newNode;
+			newNode.prev=temp;
+		}
+		size++;
+	}
+	
+	/**
 	 * 从链表尾部删除数据并返回改数据，如果链表为空，则返回null。
 	 */
 	public T deleteFromTail(){

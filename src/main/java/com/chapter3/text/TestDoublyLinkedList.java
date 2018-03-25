@@ -28,9 +28,14 @@ public class TestDoublyLinkedList {
 		list.deleteFromTail();
 		printList(list);//list is : a, b? and a.next=b,a.prev=null,b.prev=a,b.next=null ?*/
 		
-		list.deleteNode(1);
+		/*list.deleteNode(1);
 		list.deleteNode(1);
 		printList(list);// list is:a,d? and a.next=d,a.prev=null,d.prev=a,d.next=null ?
+		*/
+		list.addToMiddle("x");//list is: a,b,x,c,d?
+		list.addToMiddle("y");//list is: a,b,y,x,c,d?
+		list.addToMiddle("z");//list is: a,b,y,z,x,c,d?
+		printList(list);
 	}
 	
 	static void printList(DoublyLinkedList<String> list){
