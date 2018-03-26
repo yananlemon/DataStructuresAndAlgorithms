@@ -1,8 +1,8 @@
 package com.chapter5;
 
 /**
- * <p>Title: AddCommaToPositiveInteger</p>  
- * <p>Description:编写一个递归函数，对于任一正整数，该函数返回一个在适当
+ * <p>AddCommaToPositiveInteger</p>  
+ * <p>编写一个递归函数，对于任一正整数，该函数返回一个在适当
  * 位置加入逗号的字符串，例如putCommas(1234567)返回字符串“1,234,567” </p>  
  * @author yanan  
  * @date 2018年2月11日

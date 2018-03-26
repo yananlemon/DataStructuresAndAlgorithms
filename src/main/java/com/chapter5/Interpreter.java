@@ -9,7 +9,13 @@ import java.util.Set;
 import java.util.regex.Pattern;
 /**
  * <p>Interpreter</p>  
- * <p>递归下降解释器</p> 
+ * <p>递归下降解释器</p>
+ *  上下文无关文法如下：
+ * 	<statement>-><id>=<expression>
+ *	<expression>-><term>{(+|-)<term>}
+ *	<term>-><factor>{(*|/)<factor>}
+ *	<factor>->-<factor>|(<expression>)|number|<id>
+ *	<id>->a|b|c.....|z
  * @author yanan  
  * @date 2018年3月8日
  */
