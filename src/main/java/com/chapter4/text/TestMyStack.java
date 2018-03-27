@@ -1,6 +1,11 @@
 package com.chapter4.text;
 
-
+/**
+ * <p>TestMyStack</p>  
+ * <p>测试MyStack</p>  
+ * @author yanan  
+ * @date 2018年3月27日
+ */
 public class TestMyStack {
 
 	public static void main(String[] args) {

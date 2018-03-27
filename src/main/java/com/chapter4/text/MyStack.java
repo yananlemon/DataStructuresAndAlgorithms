@@ -2,7 +2,12 @@ package com.chapter4.text;
 
 import java.util.Arrays;
 
-
+/**
+ * <p>MyStack</p>  
+ * <p>基于数组实现的栈</p>  
+ * @author yanan  
+ * @date 2018年3月27日
+ */
 public class MyStack<E> {
 
 	private int size;
@@ -32,9 +37,7 @@ public class MyStack<E> {
 	public void push(Object value){
 		if(size()==data.length-1){
 			int newLen=(data.length-1)<<1;
-			Object[] newArray=new Object[newLen];
-			newArray=Arrays.copyOf(data, newLen);
-			data=newArray;
+			data=Arrays.copyOf(data, newLen);
 		}
 		data[size++]=value;
 	}
@@ -44,7 +47,9 @@ public class MyStack<E> {
 	 * @return T
 	 */
 	public Object pop(){
-		Object val=data[--size];
+		int index=--size;
+		Object val=data[index];
+		data[index]=null;
 		return val;
 	}
 	
@@ -55,6 +60,12 @@ public class MyStack<E> {
 	public Object topEl(){
 		Object val=data[size];
 		return val;
+	}
+	
+	public void print(){
+		for(int i = size()-1; i>=0; i--){
+			System.out.print(data[i]);
+		}
 	}
 	
 	
