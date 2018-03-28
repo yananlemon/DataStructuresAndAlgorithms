@@ -58,13 +58,13 @@ public class MyStack<E> {
 	 * @return T
 	 */
 	public Object topEl(){
-		Object val=data[size];
+		Object val=data[size-1];
 		return val;
 	}
 	
 	public void print(){
 		for(int i = size()-1; i>=0; i--){
-			System.out.print(data[i]);
+			System.out.print(data[i]+",");
 		}
 	}
 	
