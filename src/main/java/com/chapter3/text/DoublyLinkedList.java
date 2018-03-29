@@ -13,6 +13,11 @@ public class DoublyLinkedList<T> {
 	public DoublyLinkedList(){
 		head=tail=new DNode<T>(null,null, null);
 	}
+	
+	public void clear(){
+		head=tail=new DNode<T>(null,null, null);
+	}
+	
 	public int size(){
 		return size;
 	}

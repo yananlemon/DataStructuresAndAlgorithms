@@ -1,5 +1,6 @@
 package com.chapter4;
 
+import com.chapter4.text.MyQueue;
 import com.chapter4.text.MyStack;
 
 /**
@@ -20,7 +21,8 @@ public class FirstQuestion {
 		stack.print();
 		System.out.println("\n反转后：");
 		//reverse(stack).print();;
-		reverse3(stack).print();;
+		//reverse3(stack).print();;
+		reverse2(stack).print();
 	}
 	
 	/**
@@ -46,8 +48,32 @@ public class FirstQuestion {
 		}
 		return stack;
 	}
+	/**
+	 * 将栈中元素颠倒过来：使用一个额外的队列
+	 * @param stack
+	 * @return
+	 */
+	static MyStack<String> reverse2(MyStack<String> stack){
+		if(stack.isEmpty()){
+			return null;
+		}
+		MyQueue<String> queue = new MyQueue<String>();
+		while(!stack.isEmpty()){
+			queue.enqueue(stack.pop().toString());
+		}
+		int size = queue.size();
+		for (int i = 0; i < size; i++) {
+			stack.push(queue.dequeue());
+		}
+		return stack;
+	}
 	
-	//stack:top:5,4,3,2,1
+	
+	/**
+	 * 将栈中元素颠倒过来：使用一个额外的栈和几个额外的非数组变量
+	 * @param stack
+	 * @return
+	 */
 	static MyStack<String> reverse3(MyStack<String> stack){
 		if(stack.isEmpty()){
 			return null;
