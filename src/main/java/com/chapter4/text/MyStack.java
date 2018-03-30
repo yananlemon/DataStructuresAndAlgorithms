@@ -8,18 +8,22 @@ import java.util.Arrays;
  * @author yanan  
  * @date 2018年3月27日
  */
-public class MyStack<E> {
+public class MyStack<T> extends AbstractStack<T> {
 
 	private int size;
 	private int defaultCapacity=10;
-	private Object[] data;
+	private T[] data;
 	
+	@SuppressWarnings("unchecked")
 	public MyStack(){
-		this.data= new Object[defaultCapacity];
+		this.data= (T[]) new Object[defaultCapacity];
 	}
 	
 	public void clear(){
-		
+		for (int i = 0; i < size(); i++){
+			data[i] = null;
+		}
+        size = 0;
 	}
 	
 	public boolean isEmpty(){
@@ -34,7 +38,7 @@ public class MyStack<E> {
 	 * 入栈
 	 * @param value
 	 */
-	public void push(Object value){
+	public void push(T value){
 		if(size()==data.length-1){
 			int newLen=(data.length-1)<<1;
 			data=Arrays.copyOf(data, newLen);
@@ -46,9 +50,9 @@ public class MyStack<E> {
 	 * 获取并删除栈顶元素
 	 * @return T
 	 */
-	public Object pop(){
+	public T pop(){
 		int index=--size;
-		Object val=data[index];
+		T val=data[index];
 		data[index]=null;
 		return val;
 	}
@@ -57,15 +61,19 @@ public class MyStack<E> {
 	 * 获取栈顶元素但不删除
 	 * @return T
 	 */
-	public Object topEl(){
-		Object val=data[size-1];
+	public T topEl(){
+		T val=data[size-1];
 		return val;
 	}
 	
-	public void print(){
-		for(int i = size()-1; i>=0; i--){
-			System.out.print(data[i]+",");
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer("[");
+		for (int i = size()-1; i>=0; i--) {
+			sb.append(data[i]).append(",");
 		}
+		sb.deleteCharAt(sb.length()-1).append("]");
+		return sb.toString();
 	}
 	
 	

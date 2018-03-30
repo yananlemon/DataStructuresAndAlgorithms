@@ -129,12 +129,12 @@ public class HexConvertion {
 					break;
 
 				default:
-					remainderStack.push(remainder);
+					remainderStack.push(String.valueOf(remainder));
 					break;
 			}
 			num = quotient;
 		}
-		remainderStack.push(num % base);
+		remainderStack.push(String.valueOf(num % base));
 		while(!remainderStack.isEmpty()){
 			sb.append(remainderStack.pop());
 		}

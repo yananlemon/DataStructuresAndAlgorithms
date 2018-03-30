@@ -15,7 +15,8 @@ public class DoublyLinkedList<T> {
 	}
 	
 	public void clear(){
-		head=tail=new DNode<T>(null,null, null);
+		head = tail = new DNode<T>(null,null, null);
+		size = 0;
 	}
 	
 	public int size(){

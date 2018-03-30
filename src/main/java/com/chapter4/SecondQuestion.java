@@ -19,10 +19,10 @@ public class SecondQuestion {
 		stack.push(8);
 		stack.push(7);
 		System.out.println("栈stack中元素：");
-		stack.print();
+		System.out.println(stack);
 		MyStack<Integer> newStack = sort(stack);
 		System.out.println("\n排序后：");
-		newStack.print();
+		System.out.println(newStack);
 	}
 	
 	/**

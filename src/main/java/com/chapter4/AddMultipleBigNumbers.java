@@ -48,10 +48,10 @@ public class AddMultipleBigNumbers {
 			int rs = a+b+carry;
 			if(rs >= 10){
 				carry = 1;
-				resultStack.push(rs-10);
+				resultStack.push(String.valueOf(rs-10));
 			}else{
 				carry = 0;
-				resultStack.push(rs);
+				resultStack.push(String.valueOf(rs));
 			}
 		}
 		StringBuffer rs = new StringBuffer();
@@ -63,7 +63,7 @@ public class AddMultipleBigNumbers {
 	
 	static void readStr(MyStack<String> stack , String str){
 		for (int i = 0; i < str.length(); i++) {
-			stack.push(str.charAt(i));
+			stack.push(String.valueOf(str.charAt(i)));
 		}
 	}
 

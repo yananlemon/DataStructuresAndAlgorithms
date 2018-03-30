@@ -17,11 +17,11 @@ public class ThirdQuestion {
 		stack.push("4");
 		stack.push("5");
 		System.out.println("栈stack中元素：");
-		stack.print();
+		System.out.println(stack);
 		//MyStack<String> rsStack=convertUsingStack(stack);
 		MyStack<String> rsStack=convertUsingVariable(stack);
 		System.out.println("\n栈rsStack中元素：");
-		rsStack.print();
+		System.out.println(rsStack);
 	}
 	
 	/**

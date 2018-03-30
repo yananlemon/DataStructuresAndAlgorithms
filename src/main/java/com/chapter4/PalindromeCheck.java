@@ -37,8 +37,8 @@ public class PalindromeCheck {
 		MyStack<String> s2   = new MyStack<String>();
 		MyStack<String> temp = new MyStack<String>();
 		for (int i = 0; i < s.length(); i++) {
-			s1.push(s.charAt(i));
-			temp.push(s.charAt(i));
+			s1.push(String.valueOf(s.charAt(i)));
+			temp.push(String.valueOf(s.charAt(i)));
 		}
 		while(!temp.isEmpty()){
 			s2.push(temp.pop());

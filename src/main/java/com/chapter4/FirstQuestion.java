@@ -18,11 +18,11 @@ public class FirstQuestion {
 		stack.push("4");
 		stack.push("5");
 		System.out.println("原栈中元素：");
-		stack.print();
+		System.out.println(stack);
 		System.out.println("\n反转后：");
 		//reverse(stack).print();;
 		//reverse3(stack).print();;
-		reverse2(stack).print();
+		System.out.println(reverse2(stack));;
 	}
 	
 	/**
