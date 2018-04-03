@@ -12,6 +12,12 @@ public class AVLTree<AnyType extends Comparable<AnyType>> {
 
 	protected AVLNode<AnyType> root;
 	
+	
+	
+	public AVLNode<AnyType> getRoot() {
+		return root;
+	}
+
 	/**
 	 * 将element插入到BST
 	 * @param element

@@ -5,7 +5,7 @@ package com.chapter6.avl;
  * @author yanan  
  * @date 2018年4月3日
  */
-class AVLNode<AnyType extends Comparable<AnyType>>{
+public class AVLNode<AnyType extends Comparable<AnyType>>{
 	AnyType element;
 	int height;
 	AVLNode<AnyType> left;
@@ -17,4 +17,30 @@ class AVLNode<AnyType extends Comparable<AnyType>>{
 		super();
 		this.element = element;
 	}
+	public AnyType getElement() {
+		return element;
+	}
+	public void setElement(AnyType element) {
+		this.element = element;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	public AVLNode<AnyType> getLeft() {
+		return left;
+	}
+	public void setLeft(AVLNode<AnyType> left) {
+		this.left = left;
+	}
+	public AVLNode<AnyType> getRight() {
+		return right;
+	}
+	public void setRight(AVLNode<AnyType> right) {
+		this.right = right;
+	}
+	
+	
 }
