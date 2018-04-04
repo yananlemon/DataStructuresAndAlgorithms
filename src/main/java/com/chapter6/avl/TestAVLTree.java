@@ -10,7 +10,7 @@ public class TestAVLTree {
 
 	public static void main(String[] args) {
 		AVLTree<Integer> avl = new AVLTree<Integer>();
-		for(int i = 1; i<20 ; i++){
+		for(int i = 1; i<1000001 ; i++){
 			avl.insert(i);
 		}
 		/*avl.insert(10);
@@ -38,7 +38,7 @@ public class TestAVLTree {
 		
 		System.out.println("二叉搜索树的高度是："+avl.root.height);
 		System.out.println("in order iterate:");
-		avl.inorder(avl.root);
+		//avl.inorder(avl.root);
 		avl.delete(8);
 		avl.delete(9);
 		avl.delete(10);
@@ -46,10 +46,8 @@ public class TestAVLTree {
 		avl.delete(15);
 		avl.delete(19);
 		System.out.println("\n");
+		System.out.println(avl.find(8));
 		System.out.println("二叉搜索树的高度是："+avl.root.height);
-		avl.inorder(avl.root);
-		BTreePrinter<Integer> printer = new BTreePrinter<Integer>();
-		printer.printNode(avl.root);
 	}
 
 }
