@@ -28,9 +28,10 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 		if(node == null){
 			return new BinaryNode<AnyType>(element);
 		}
-		if(element.compareTo(node.element) < 0){
+		int compare = element.compareTo(node.element);
+		if(compare < 0){
 			node.left = insert(element, node.left);
-		}else if(element.compareTo(node.element) > 0){
+		}else if(compare > 0){
 			node.right = insert(element, node.right);
 		}else{
 			throw new Error("不可以将相同的值插入到BST！");
@@ -71,13 +72,23 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 			AnyType element) {
 		if(node == null){
 			return null;
-		}else if(node.element.compareTo(element) < 0){
+		} 
+		int compareResult = node.element.compareTo(element);
+		if(compareResult < 0){
 			node.right = delete(node.right, element);
-		}else if(node.element.compareTo(element) > 0){
+		}else if(compareResult > 0){
 			node.left = delete(node.left, element);
-		}else if(node.left != null && node.right != null){
+		}
+		
+		// 待删除的节点有两个子节点那么找到其右子树中最小值代替被删除节点的值并删除该节点
+		else if(node.left != null && node.right != null){
 			node.element = findMin(node.right).element;
 			node.right = deleteMin(node.right);
+		}
+		
+		// 待删除的节点只有一个子节点
+		else {
+			node = (node.left != null ) ? node.left : node.right;
 		}
 		return node;
 	}
@@ -89,6 +100,11 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 		root = deleteMin(root);
 	}
 	
+	/**
+	 * 删除最小节点
+	 * @param node
+	 * @return
+	 */
 	private BinaryNode<AnyType> deleteMin(BinaryNode<AnyType> node) {
 		if(node != null){
 			if(node.left == null){
@@ -111,15 +127,13 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	}
 	
 	private AnyType find(BinaryNode<AnyType> node, AnyType element) {
-		if(node == null){
+		if(node == null || element == null){
 			return null;
 		}
-		if(element == null){
-			return null;
-		}
-		if(node.element.compareTo(element) < 0){
+		int compare = node.element.compareTo(element);
+		if(compare < 0){
 			return find(node.right, element);
-		}else if(node.element.compareTo(element) > 0){
+		}else if(compare > 0){
 			return find(node.left, element);
 		}else{
 			return node.element;
