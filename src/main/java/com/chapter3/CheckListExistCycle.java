@@ -76,6 +76,7 @@ public class CheckListExistCycle {
 			node1=node1.getNext();
 			node2=node2.getNext().getNext();
 			if(node1.getVal()==node2.getVal()){
+				System.out.println("相遇的位置："+node1.val);
 				return true;
 			}
 			
