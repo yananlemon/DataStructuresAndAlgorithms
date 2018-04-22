@@ -13,6 +13,7 @@ public class TestAVLTree {
 		for(int i = 1; i<1000001 ; i++){
 			avl.insert(i);
 		}
+		
 		/*avl.insert(10);
 		avl.insert(12);
 		avl.insert(15);

@@ -35,10 +35,9 @@ public class AVLTree<AnyType extends Comparable<AnyType>> {
 				node.left = insert(element, node.left);
 				//插入节点后，判断是否需要平衡
 				if(height(node.left)-height(node.right) == 2){
-					//当前节点的左孩子节点大于element进行左旋转
-					if(element.compareTo(node.left.element) > 0){
+					if(element.compareTo(node.left.element) > 0){//先逆时针旋转再顺时针旋转
 						node = lrRotation(node);
-					}else if(element.compareTo(node.left.element) < 0){//当前节点的左孩子节点小于element进行先左后右旋转
+					}else if(element.compareTo(node.left.element) < 0){//顺时针旋转
 						node = llRotation(node);
 					}
 				}
@@ -46,10 +45,9 @@ public class AVLTree<AnyType extends Comparable<AnyType>> {
 				node.right = insert(element, node.right);
 				//插入节点后，判断是否需要平衡
 				if(height(node.right)-height(node.left) == 2){
-					//element大于当前节点的右孩子节点进行rr旋转
-					if(element.compareTo(node.right.element) > 0){
+					if(element.compareTo(node.right.element) > 0){//逆时针旋转
 						node = rrRotation(node);
-					}else if(element.compareTo(node.right.element) < 0){//element大于当前节点的右孩子节点进行rr旋转
+					}else if(element.compareTo(node.right.element) < 0){//先顺时针旋转再逆时针旋转
 						node = rlRotation(node);
 					}
 				}
@@ -240,7 +238,7 @@ public class AVLTree<AnyType extends Comparable<AnyType>> {
 	}
 	
 	/**
-	 * 左单旋转
+	 * 顺时针旋转
 	 * @param k2
 	 * @return
 	 */
@@ -258,7 +256,7 @@ public class AVLTree<AnyType extends Comparable<AnyType>> {
 	}
 	
 	/**
-	 * 右单旋转
+	 * 逆时针旋转
 	 * @param k2
 	 * @return
 	 */
@@ -273,7 +271,7 @@ public class AVLTree<AnyType extends Comparable<AnyType>> {
 	}
 	
 	/**
-	 * left right 旋转
+	 * 先逆时针旋转再顺时针旋转
 	 * @param k2
 	 * @return
 	 */
@@ -283,7 +281,7 @@ public class AVLTree<AnyType extends Comparable<AnyType>> {
 	}
 	
 	/**
-	 * left right 旋转
+	 * 先顺时针旋转再逆时针旋转
 	 * @param k2
 	 * @return
 	 */
