@@ -8,6 +8,12 @@ package com.chapter6.navl;
 public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 	
 	private AvlNode<AnyType> root;//根节点
+	
+	
+
+	public AvlNode<AnyType> getRoot() {
+		return root;
+	}
 
 	private static class AvlNode<AnyType>{
 		private AnyType 			element;	//数据
@@ -54,14 +60,12 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 				if(height(root.left)-height(root.right) == 2){
 					
 					// 如果插入到了root节点的左子树的右子树上则先逆时针旋转再顺时针旋转
-					if(element.compareTo(root.left.element) > 0){
+					if(element.compareTo(root.left.element) > 0)
 						root = doubleWithLeftChild(root);
-					}
 					
 					// 如果插入到了root节点的左子树的左子树上则进行顺时针旋转
-					else if(element.compareTo(root.left.element) < 0){
+					else if(element.compareTo(root.left.element) < 0)
 						root = rotateWithLeftChild(root);
-					}
 				}
 			}
 			else {
@@ -71,14 +75,12 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 				if(height(root.right)-height(root.left) == 2){
 					
 					// 如果插入到了root节点的右子树的右子树上则进行逆时针旋转
-					if(element.compareTo(root.right.element) > 0){
+					if(element.compareTo(root.right.element) > 0)
 						root = rotateWithRightChild(root);
-					}
 					
 					// 如果插入到了root节点的右子树的左子树上则先逆时针旋转再顺时针旋转
-					else if(element.compareTo(root.right.element) < 0){
+					else if(element.compareTo(root.right.element) < 0)
 						root = doubleWithRightChild(root);
-					}
 				}
 			}
 		}
@@ -140,5 +142,189 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		return t == null ? 0 : t.height;
 	}
 	
+	public void delete(AnyType element){
+		root = delete(root,element);
+	}
+
+	private AvlNode<AnyType> delete(AvlNode<AnyType> t, AnyType element) {
+		// 树为空
+		if(t == null)
+			return null;
+		
+		int compareResult = element.compareTo(t.element);
+		
+		// 递归左子树
+		if(compareResult < 0){
+			t.left = delete(t.left, element);
+		}
+		
+		// 递归右子树
+		else if(compareResult > 0){
+			t.right = delete(t.right, element);
+		}
+		
+		// 待删除的节点有两个子节点那么找到其右子树中最小值代替被删除节点的值并删除该节点
+		else if(t.left != null && t.right != null){
+			t.element = findMin(t.right).element;
+			t.right = deleteMin(t.right);
+		}
+		
+		// 待删除的节点只有一个子节点
+		else {
+			t = (t.left != null ) ? t.left : t.right;
+		}
+		
+		return balance(t);
+	}
+	
+	private AvlNode<AnyType> balance(AvlNode<AnyType> t) {
+		if(t == null)
+			return null;
+		if(height(t.left) - height(t.right) > 1){
+			if(height(t.left.left) >= height(t.left.right))
+				//顺时针旋转
+				t = rotateWithLeftChild(t);
+			else
+				//先逆时针旋转再顺时针旋转
+				t = doubleWithLeftChild(t);
+		}
+		else{
+			if(height(t.right) - height(t.left) > 1){
+				if(height(t.right.right) >= height(t.right.left))
+					//逆时针旋转
+					t = rotateWithRightChild(t);
+				else
+					//先顺时针旋转再逆时针旋转
+					t = doubleWithRightChild(t);
+			}
+		}
+		t.height = Math.max(height(t.left), height(t.right)) + 1;
+		return t;
+			
+	}
+
+	/**
+	 * 在BST中搜索element
+	 * @param element
+	 * @return
+	 */
+	public AnyType find(AnyType element){
+		return find(root,element);
+	}
+	
+	private AnyType find(AvlNode<AnyType> node, AnyType element) {
+		if(node == null || element == null){
+			return null;
+		}
+		int compare = node.element.compareTo(element);
+		if(compare < 0){
+			return find(node.right, element);
+		}else if(compare > 0){
+			return find(node.left, element);
+		}else{
+			return node.element;
+		}
+	}
+
+	/**
+	 * 在BST中搜索最小的element
+	 * @param element
+	 * @return
+	 */
+	public AnyType findMin(){
+		return elementAt(findMin(root));
+	}
+	
+	private AvlNode<AnyType> findMin(AvlNode<AnyType> node) {
+		if(node == null){
+			return null;
+		}
+		if(node.left == null){
+			return node;
+		}
+		return findMin(node.left);
+	}
+
+	/**
+	 * 在BST中搜索最大的element
+	 * @param element
+	 * @return
+	 */
+	public AnyType findMax(){
+		return elementAt(findMax(root));
+	}
+	
+	/**
+	 * 删除最小的节点
+	 */
+	public void deleteMin(){
+		root = deleteMin(root);
+	}
+	
+	private AnyType elementAt(AvlNode<AnyType> node){
+		return node == null ? null : node.element;
+	}
+	
+	private AvlNode<AnyType> findMax(AvlNode<AnyType> node){
+		if(node == null){
+			return null;
+		}
+		if(node.right == null){
+			return node;
+		}else{
+			return findMax(node.right);
+		}
+	}
+	
+	/**
+	 * 删除最小节点
+	 * @param node
+	 * @return
+	 */
+	private AvlNode<AnyType> deleteMin(AvlNode<AnyType> node) {
+		if(node != null){
+			if(node.left == null){
+				return node.right;
+			}else{
+				node.left = deleteMin(node.left);
+				return node;
+			}
+		}
+		return null;
+	}
+
+	
+	/* 获取二叉树高度
+	 * @param root
+	 * @return
+	 */
+	int calDepth(AvlNode<AnyType> root) {
+		if(root == null) {
+			return 0;
+		}
+		return Math.max(calDepth(root.left), calDepth(root.right))+1;
+	}
+	
+	boolean isAVLTree(AvlNode<AnyType> root) {
+		if(root == null) {
+			return true;
+		}else {
+			int leftHight = calDepth(root.left);
+			int rightHight = calDepth(root.right);
+			if(Math.abs(leftHight - rightHight) >1) {
+				return false;
+			}else {
+				return isAVLTree(root.left) && isAVLTree(root.right);
+			}
+		}
+	}
+	
+	public void inorder(AvlNode<AnyType> root){
+		if(root != null){
+			inorder(root.left);
+			System.out.print(root.element+",");
+			inorder(root.right);
+		}
+	}
 	
 }
