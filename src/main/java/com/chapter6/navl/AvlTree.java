@@ -143,6 +143,9 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 	}
 	
 	public void delete(AnyType element){
+		if(find(element) == null ){
+			return;
+		}
 		root = delete(root,element);
 	}
 
@@ -150,25 +153,20 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		// 树为空
 		if(t == null)
 			return null;
-		
 		int compareResult = element.compareTo(t.element);
-		
 		// 递归左子树
 		if(compareResult < 0){
 			t.left = delete(t.left, element);
 		}
-		
 		// 递归右子树
 		else if(compareResult > 0){
 			t.right = delete(t.right, element);
 		}
-		
 		// 待删除的节点有两个子节点那么找到其右子树中最小值代替被删除节点的值并删除该节点
 		else if(t.left != null && t.right != null){
 			t.element = findMin(t.right).element;
 			t.right = deleteMin(t.right);
 		}
-		
 		// 待删除的节点只有一个子节点
 		else {
 			t = (t.left != null ) ? t.left : t.right;
