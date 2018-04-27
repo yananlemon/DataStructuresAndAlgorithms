@@ -9,8 +9,8 @@ package com.chapter6.bst;
  */
 public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 	
-	protected BinaryNode<AnyType> root = null;
-	
+	public  BinaryNode<AnyType> root = null;
+
 	public BinarySearchTree(){
 		
 	}
@@ -206,19 +206,5 @@ public class BinarySearchTree<AnyType extends Comparable<? super AnyType>> {
 			System.out.print(node.element+",");
 			inorder(node.right);
 		}
-	}
-	
-	
-	
-}
-
-class BinaryNode<AnyType>{
-	AnyType element;
-	BinaryNode<AnyType> left;
-	BinaryNode<AnyType> right;
-	BinaryNode(AnyType element){
-		this.element = element;
-		left = null;
-		right = null;
 	}
 }

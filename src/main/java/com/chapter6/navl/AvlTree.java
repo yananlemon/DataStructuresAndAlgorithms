@@ -157,10 +157,31 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		// 递归左子树
 		if(compareResult < 0){
 			t.left = delete(t.left, element);
+			// 判断是否平衡
+			if(height(t.right) - height(t.left) == 2){
+				AvlNode<AnyType> currNode = t.right;
+				//判断需要进行哪种旋转
+				if(height(currNode.left) > height(currNode.right)){
+					t = doubleWithRightChild(t);
+				}else{
+					t = rotateWithRightChild(t);
+				}
+			}
 		}
 		// 递归右子树
 		else if(compareResult > 0){
 			t.right = delete(t.right, element);
+			// 判断是否平衡
+			if(height(t.left) - height(t.right) == 2){
+				AvlNode<AnyType> currNode = t.left;
+				//判断需要进行哪种旋转
+				if(height(currNode.right) > height(currNode.left)){
+					t = doubleWithLeftChild(t);
+				}else{
+					t = rotateWithLeftChild(t);
+					
+				}
+			}
 		}
 		// 待删除的节点有两个子节点那么找到其右子树中最小值代替被删除节点的值并删除该节点
 		else if(t.left != null && t.right != null){
@@ -172,33 +193,9 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 			t = (t.left != null ) ? t.left : t.right;
 		}
 		
-		return balance(t);
-	}
-	
-	private AvlNode<AnyType> balance(AvlNode<AnyType> t) {
-		if(t == null)
-			return null;
-		if(height(t.left) - height(t.right) > 1){
-			if(height(t.left.left) >= height(t.left.right))
-				//顺时针旋转
-				t = rotateWithLeftChild(t);
-			else
-				//先逆时针旋转再顺时针旋转
-				t = doubleWithLeftChild(t);
-		}
-		else{
-			if(height(t.right) - height(t.left) > 1){
-				if(height(t.right.right) >= height(t.right.left))
-					//逆时针旋转
-					t = rotateWithRightChild(t);
-				else
-					//先顺时针旋转再逆时针旋转
-					t = doubleWithRightChild(t);
-			}
-		}
-		t.height = Math.max(height(t.left), height(t.right)) + 1;
+		if(t != null)
+			t.height = Math.max(height(t.left), height(t.right)) + 1;
 		return t;
-			
 	}
 
 	/**
