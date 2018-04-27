@@ -3,14 +3,19 @@ package com.chapter6;
 
 import com.chapter6.bst.BinaryNode;
 import com.chapter6.bst.BinarySearchTree;
-
+/**
+ * <p>MirrorOfBST</p>
+ * <p>编写一个函数，创建二叉查找树的镜像</p>
+ * @author yanan
+ * @date 2018年4月27日
+ */
 public class MirrorOfBST {
 
 	public static void main(String[] args) {
 		BinarySearchTree<Integer> bst = new BinarySearchTree<Integer>();
 		// 第一种情况：
 		// 	 	 10						 10
-		//		/  \       镜像                          /   \
+		//		/  \       镜像                 /   \
 		//     5    20    ------>     20    5 
 		//    / \   / \              / \   / \
 		//   1   6 15 30            30 15 6   1 

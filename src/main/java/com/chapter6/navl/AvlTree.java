@@ -186,7 +186,8 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		// 待删除的节点有两个子节点那么找到其右子树中最小值代替被删除节点的值并删除该节点
 		else if(t.left != null && t.right != null){
 			t.element = findMin(t.right).element;
-			t.right = deleteMin(t.right);
+			//t.right = deleteMin(t.right); fix a bug on 2018/4/27
+			t.right = delete(t.right, t.element);
 		}
 		// 待删除的节点只有一个子节点
 		else {
