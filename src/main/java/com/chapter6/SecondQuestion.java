@@ -11,7 +11,7 @@ package com.chapter6;
  * @author yanan  
  * @date 2018年3月31日
  */
-public class SecondQuesion {
+public class SecondQuestion {
 
 	public static void main(String[] args) {
 		/**     8
