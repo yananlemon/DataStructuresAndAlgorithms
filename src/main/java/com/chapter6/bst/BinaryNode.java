@@ -1,6 +1,6 @@
 package com.chapter6.bst;
 public class BinaryNode<AnyType>{
-	AnyType element;
+	public AnyType element;
 	public BinaryNode<AnyType> left;
 	public BinaryNode<AnyType> right;
 	BinaryNode(AnyType element){

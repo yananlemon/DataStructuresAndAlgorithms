@@ -91,6 +91,11 @@ class BinaryTree{
 		this.left = left;
 		this.right = right;
 	}
+	
+	public BinaryTree(int value) {
+		this.value = value;
+	}
+	
 	public int getValue() {
 		return value;
 	}
