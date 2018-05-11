@@ -1,6 +1,8 @@
 package com.chapter6.practice;
 
 
+import java.util.Scanner;
+
 import com.chapter6.bst.BinaryNode;
 
 /**
@@ -15,12 +17,45 @@ public class CalcutePreOrderMathExpression {
 
 	public static void main(String[] args) {
 		System.out.println("请输入一个前缀表达式并以#号结束，例如+ - 2 * 3 4 5");
-		//String preOrderStr = "+ - 2 * 3 4 5";
-		//String preOrderStr = "- 2 * 3 4";
-		//String preOrderStr = "* - 2 3 + 4 5";
-		String preOrderStr = "- 2 + * 3 4 5";
-		BinaryNode<String> rs = buildExpressionTreeWithPreOrderStr(preOrderStr.split(" "));
-		System.out.println(rs);
+		Scanner in = new Scanner(System.in);
+		while(true){
+			String next = in.nextLine();
+			//String preOrderStr = "+ - 2 * 3 4 5"; // -5
+			//String preOrderStr = "- 2 * 3 4"; 
+			//String preOrderStr = "* - 2 3 + 4 5"; //  -9
+			//String preOrderStr = "- 2 + * 3 4 5";// -15
+			if(next.endsWith("#")){
+				BinaryNode<String> rs = buildExpressionTreeWithPreOrderStr(next.substring(0, next.lastIndexOf("#")).split(" "));
+				System.out.println(calculateExpressTree(rs));
+				System.out.println("是否继续？(Y/N)");
+				String c = in.next();
+				if(c.equalsIgnoreCase("n")){
+					break;
+				}
+			}
+			
+		}
+		in.close();
+	}
+	
+	static double calculateExpressTree(BinaryNode<String> tree){
+		// 如果是操作符则将操作符应用于左子树和右子树
+		if(!isNumeric(tree.element)){
+			String operator = tree.element;
+			if(operator.equals("+")){
+				return calculateExpressTree(tree.left) + calculateExpressTree(tree.right);
+			}else if(operator.equals("-")){
+				return calculateExpressTree(tree.left) - calculateExpressTree(tree.right);
+			}else if(operator.equals("*")){
+				return calculateExpressTree(tree.left) * calculateExpressTree(tree.right);
+			}else if(operator.equals("/")){
+				return calculateExpressTree(tree.left) / calculateExpressTree(tree.right);
+			}else{
+				throw new Error("未知的符号："+operator);
+			}
+		}else{
+			return Double.valueOf(tree.element);
+		}
 	}
 	
 	/**
@@ -82,7 +117,6 @@ public class CalcutePreOrderMathExpression {
 		return rs;
 	}
 	
-	//方法一：用JAVA自带的函数
 	public static boolean isNumeric(String str){
 	   for (int i = str.length();--i>=0;){  
 	       if (!Character.isDigit(str.charAt(i))){
