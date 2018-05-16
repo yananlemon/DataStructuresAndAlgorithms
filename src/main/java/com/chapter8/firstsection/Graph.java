@@ -1,5 +1,11 @@
 package com.chapter8.firstsection;
 
+/**
+ * <p>Graph</p>
+ * <p>图的邻接矩阵表示方法</p>
+ * @author yanan
+ * @date 2018年5月16日
+ */
 public class Graph {
 	
 	/*顶点集合*/
@@ -51,7 +57,7 @@ public class Graph {
 	 * @param v
 	 * @return
 	 */
-	int test(Graph graph,String v){
+	int getDegreeOfVertex(Graph graph,String v){
 		// 首先检查顶点在图中是否存在
 		int index = checkVertexWhetherExist(graph, v);
 		if(index == -1)
@@ -76,7 +82,7 @@ public class Graph {
 	public static void main(String[] args) {
 		Graph graph = new Graph();
 		String v = "V12";
-		int rs = graph.test(graph, v);
+		int rs = graph.getDegreeOfVertex(graph, v);
 		System.out.printf("顶点%s的度是%d\n",v,rs);
 	}
 }
