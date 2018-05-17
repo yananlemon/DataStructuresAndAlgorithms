@@ -1,5 +1,8 @@
 package com.chapter8.firstsection;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <p>Graph</p>
  * <p>图的邻接矩阵表示方法</p>
@@ -70,6 +73,41 @@ public class Graph {
 		return rs;
 	}
 	
+	/**
+	 * 判断两个顶点之间是否存在边，算法如下：
+	 * 获取两个顶点所在的一维数组的索引，然后判断edge[rowIndex][colIndex] 是否等于1
+	 * @param graph
+	 * @param v1
+	 * @param v2
+	 * @return
+	 */
+	boolean checkEdgeWhetherExistWithVertex(Graph graph,String v1,String v2) {
+		int rowIndex = checkVertexWhetherExist(graph, v1);
+		int colIndex = checkVertexWhetherExist(graph, v2);
+		if(rowIndex == -1 || colIndex == -1)
+			return false;
+		return edge[rowIndex][colIndex] == 1 ? true : false;
+	}
+	
+	/**
+	 * 获取顶点V的所有邻接点
+	 * @param graph
+	 * @param v
+	 * @return
+	 */
+	List<String> getAdjacentByVertex(Graph graph,String v){
+		List<String> rs = new ArrayList<String>();
+		int index = checkVertexWhetherExist(graph, v);
+		if(index == -1)
+			return null;
+		for (int i = 0; i < graph.edge[index].length; i++) {
+			if(graph.edge[index][i] == 1)
+				rs.add(graph.vertex[i]);
+		}
+		return rs;
+		
+	}
+	
 	int checkVertexWhetherExist(Graph graph,String v){
 		int index = 0;
 		for (; index < graph.vertex.length; index++) {
@@ -81,8 +119,11 @@ public class Graph {
 	
 	public static void main(String[] args) {
 		Graph graph = new Graph();
-		String v = "V12";
+		String v = "V3";
 		int rs = graph.getDegreeOfVertex(graph, v);
 		System.out.printf("顶点%s的度是%d\n",v,rs);
+		String v2 = "V1";
+		System.out.printf("顶点%s和顶点%s之间是否存在边？%b\n",v,v2,graph.checkEdgeWhetherExistWithVertex(graph, v, v2));
+		System.out.println("顶点"+v2+"的所有邻接点是："+graph.getAdjacentByVertex(graph, v2));
 	}
 }
