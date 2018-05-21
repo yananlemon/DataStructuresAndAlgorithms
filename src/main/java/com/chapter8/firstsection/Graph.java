@@ -7,15 +7,17 @@ import java.util.List;
  * <p>Graph</p>
  * <p>图的邻接矩阵表示方法</p>
  * @author yanan
- * @date 2018年5月16日
+ * @date 2018年5月16日 
  */
 public class Graph {
 	
-	/*顶点集合*/
-	private String[] vertex = new String[5];
+	private static final int MAX_SIZE_OF_VERTEX = 100;
 	
-	/*各个顶点之间的邻接关系*/
-	private int[][] edge = new int[5][5];
+	/*顶点集合*/
+	private String[] vertex = new String[MAX_SIZE_OF_VERTEX];
+	
+	/*各个顶点之间边的关系*/
+	private int[][] edge = new int[MAX_SIZE_OF_VERTEX][MAX_SIZE_OF_VERTEX];
 	
 	public Graph(){
 		vertex[0] = "V1";
