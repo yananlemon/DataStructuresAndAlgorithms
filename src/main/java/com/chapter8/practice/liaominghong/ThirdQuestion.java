@@ -1,17 +1,18 @@
+
 package com.chapter8.practice.liaominghong;
 
 import java.util.Scanner;
 
 /**
  * <p>ThirdQuestion</p>
- * <p>Ï°ÌâµÚÈıÌâ</p>
+ * <p>ä¹ é¢˜ç¬¬ä¸‰é¢˜</p>
  * @author yanan
- * @date 2018Äê5ÔÂ22ÈÕ 
+ * @date 2018å¹´5æœˆ22æ—¥ 
  */
 public class ThirdQuestion {
 
 	public static void main(String[] args) {
-		// Ê¹ÓÃÁÚ½Ó±í´´½¨Í¼
+		// ä½¿ç”¨é‚»æ¥è¡¨åˆ›å»ºå›¾
 		Graph adjList = new AdjacencyListGraph();
 		/*
 		 E:
@@ -25,7 +26,7 @@ public class ThirdQuestion {
 		Graph created = adjList.createGraph();
 		adjList.showGraph(created);
 		
-		// Ê¹ÓÃÁÚ½Ó¾ØÕó´´½¨Í¼
+		// ä½¿ç”¨é‚»æ¥çŸ©é˜µåˆ›å»ºå›¾
 		/*Graph adjList = new AdjacencyMatrixGraph();
 		Graph created = adjList.createGraph();//E:{(0,1),(0,3),(1,2),(1,4),(2,3),(2,4),(3,4)}
 		adjList.showGraph(created);*/
@@ -35,49 +36,49 @@ public class ThirdQuestion {
 }
 
 abstract class Graph{
-	protected int n;//¶¥µãÊıÁ¿
-	protected int e;//±ßÊı
+	protected int n;//é¡¶ç‚¹æ•°é‡
+	protected int e;//è¾¹æ•°
 	public abstract Graph createGraph();
 	public abstract void showGraph(Graph g);
 }
 /**
- * Ê¹ÓÃÁÚ½Ó¾ØÕóÊµÏÖÍ¼
+ * ä½¿ç”¨é‚»æ¥çŸ©é˜µå®ç°å›¾
  * @author andy
  */
 class AdjacencyMatrixGraph extends Graph{
 
 private static final int MAX_SIZE_OF_VERTEX = 100;
 	
-	/*¶¥µã¼¯ºÏ*/
+	/*é¡¶ç‚¹é›†åˆ*/
 	private String[] vertex = new String[MAX_SIZE_OF_VERTEX];
 	
-	/*¸÷¸ö¶¥µãÖ®¼ä±ßµÄ¹ØÏµ*/
+	/*å„ä¸ªé¡¶ç‚¹ä¹‹é—´è¾¹çš„å…³ç³»*/
 	private int[][] edge = new int[MAX_SIZE_OF_VERTEX][MAX_SIZE_OF_VERTEX];
 	
 	@Override
 	public Graph createGraph() {
 		AdjacencyMatrixGraph graph = new AdjacencyMatrixGraph();
 		Scanner in = new Scanner(System.in);
-		System.out.println("ÇëÊäÈëÍ¼µÄ¶¥µãÊıÁ¿\n");
+		System.out.println("è¯·è¾“å…¥å›¾çš„é¡¶ç‚¹æ•°é‡\n");
 		graph.n = in.nextInt();
-		System.out.println("ÇëÊäÈëÍ¼µÄ±ßÊı\n");
+		System.out.println("è¯·è¾“å…¥å›¾çš„è¾¹æ•°\n");
 		graph.e = in.nextInt();
-		System.out.println("ÇëÃ¿´ÎÊäÈëÒ»¸ö¶¥µãÃû³Æ£¬²¢°´»Ø³µ¼ü\n");
+		System.out.println("è¯·æ¯æ¬¡è¾“å…¥ä¸€ä¸ªé¡¶ç‚¹åç§°ï¼Œå¹¶æŒ‰å›è½¦é”®\n");
 		
-		// ½¨Á¢¶¥µã±í
+		// å»ºç«‹é¡¶ç‚¹è¡¨
 		for (int i = 0; i < graph.n; i++) {
 			graph.vertex[i] = in.next();
 		}
 		
-		// ³õÊ¼»¯ÁÚ½Ó¾ØÕó
+		// åˆå§‹åŒ–é‚»æ¥çŸ©é˜µ
 		for (int i = 0; i < graph.n; i++) {
 			for (int j = 0; j < graph.n; j++) {
 				graph.edge[i][j] = 0;
 			}
 		}
 		
-		System.out.println("ÇëÊäÈëÃ¿Ìõ±ßÀıÈç(¶¥µãiµÄË÷Òı,¶¥µãjµÄË÷Òı)£¬²¢°´»Ø³µ¼ü\n");
-		// ½¨Á¢ÁÚ½Ó¾ØÕó
+		System.out.println("è¯·è¾“å…¥æ¯æ¡è¾¹ä¾‹å¦‚(é¡¶ç‚¹içš„ç´¢å¼•,é¡¶ç‚¹jçš„ç´¢å¼•)ï¼Œå¹¶æŒ‰å›è½¦é”®\n");
+		// å»ºç«‹é‚»æ¥çŸ©é˜µ
 		for (int i = 0; i < graph.e; i++) {
 			String str = in.next();
 			String[] strs = str.split(",");
@@ -94,8 +95,8 @@ private static final int MAX_SIZE_OF_VERTEX = 100;
 	@Override
 	public void showGraph(Graph g) {
 		if(g instanceof AdjacencyMatrixGraph){
-			System.out.println("Í¼ÒÑ¾­³É¹¦½¨Á¢£¡");
-			System.out.println("ÏÂÃæÊÇ¸ÃÍ¼ÁÚ½Ó¾ØÕó£º");
+			System.out.println("å›¾å·²ç»æˆåŠŸå»ºç«‹ï¼");
+			System.out.println("ä¸‹é¢æ˜¯è¯¥å›¾é‚»æ¥çŸ©é˜µï¼š");
 			for (int i = 0; i < g.n; i++) {
 				for (int k = 0; k < g.n; k++) {
 					System.out.print(((AdjacencyMatrixGraph) g).edge[i][k]+" ");
@@ -108,15 +109,15 @@ private static final int MAX_SIZE_OF_VERTEX = 100;
 }
 
 /**
- * Ê¹ÓÃÁÚ½Ó±íÊµÏÖÍ¼
+ * ä½¿ç”¨é‚»æ¥è¡¨å®ç°å›¾
  * @author andy
  */
 class AdjacencyListGraph extends Graph{
 	
-	/**¶¥µã±íÍ·½Úµã**/
+	/**é¡¶ç‚¹è¡¨å¤´èŠ‚ç‚¹**/
 	private VertexNode head ;
 	
-	/**¶¥µã±íÎ²½Úµã**/
+	/**é¡¶ç‚¹è¡¨å°¾èŠ‚ç‚¹**/
 	private VertexNode tail ;
 	
 	private void addToTail(String vertex){
@@ -145,27 +146,27 @@ class AdjacencyListGraph extends Graph{
 	@Override
 	public Graph createGraph() {
 		Scanner in = new Scanner(System.in);
-		System.out.println("ÇëÊäÈëÍ¼ÖĞ¶¥µãµÄÊıÁ¿:");
+		System.out.println("è¯·è¾“å…¥å›¾ä¸­é¡¶ç‚¹çš„æ•°é‡:");
 		this.n = in.nextInt();
-		System.out.println("ÇëÊäÈëÍ¼ÖĞ±ßµÄÊıÁ¿:");
+		System.out.println("è¯·è¾“å…¥å›¾ä¸­è¾¹çš„æ•°é‡:");
 		this.e = in.nextInt();
-		// 1.³õÊ¼»¯¶¥µã
-		System.out.println("ÇëÒÀ´ÎÊäÈëÃ¿¸ö¶¥µã°´»Ø³µ½áÊø\n");
+		// 1.åˆå§‹åŒ–é¡¶ç‚¹
+		System.out.println("è¯·ä¾æ¬¡è¾“å…¥æ¯ä¸ªé¡¶ç‚¹æŒ‰å›è½¦ç»“æŸ\n");
 		for (int i = 0; i < this.n; i++) {
 			String verLine = in.next();
 			addToTail(verLine);
 		}
 		
-		// 2.¹¹½¨±ß±í
-		System.out.println("ÇëÒÀ´ÎÊäÈëÁ½¸ö¶¥µã²¢»Ø³µ¡£ÀıÈç(a,b),Õâ´ú±íÁ½¸ö¶¥µãÖ®¼ä´æÔÚÒ»Ìõ±ß");
+		// 2.æ„å»ºè¾¹è¡¨
+		System.out.println("è¯·ä¾æ¬¡è¾“å…¥ä¸¤ä¸ªé¡¶ç‚¹å¹¶å›è½¦ã€‚ä¾‹å¦‚(a,b),è¿™ä»£è¡¨ä¸¤ä¸ªé¡¶ç‚¹ä¹‹é—´å­˜åœ¨ä¸€æ¡è¾¹");
 		for (int i = 0; i < this.e; i++) {
 			String eLine = in.next();
 			String[] edgeArray = eLine.split(",");
-			// È·±£ÊäÈëµÄÁ½¸ö¶¥µã´æÔÚÓÚ¶¥µã±íÖĞ
+			// ç¡®ä¿è¾“å…¥çš„ä¸¤ä¸ªé¡¶ç‚¹å­˜åœ¨äºé¡¶ç‚¹è¡¨ä¸­
 			VertexNode firstNode = findByName(edgeArray[0]);
 			VertexNode secondNode = findByName(edgeArray[1]);
 			if(firstNode != null && secondNode != null){
-				// ¹¹Ôì±ß±í½Úµã
+				// æ„é€ è¾¹è¡¨èŠ‚ç‚¹
 				EdgeNode edgeNode = new EdgeNode();
 				edgeNode.vertex = edgeArray[1];
 				edgeNode.next = firstNode.firstEdge;
@@ -189,10 +190,10 @@ class AdjacencyListGraph extends Graph{
 		if(g instanceof AdjacencyListGraph){
 			adjGraph = (AdjacencyListGraph) g;
 		}
-		System.out.println("Í¼ÒÑ¾­³É¹¦½¨Á¢£¬ĞÅÏ¢ÈçÏÂ");
+		System.out.println("å›¾å·²ç»æˆåŠŸå»ºç«‹ï¼Œä¿¡æ¯å¦‚ä¸‹");
 		VertexNode temp = adjGraph.head;
 		while(temp != null){
-			System.out.printf("¶¥µã:%s->",temp.vertex);
+			System.out.printf("é¡¶ç‚¹:%s->",temp.vertex);
 			EdgeNode node = temp.firstEdge;
 			while(node != null){
 				System.out.printf("%s->",node.vertex);
@@ -204,7 +205,7 @@ class AdjacencyListGraph extends Graph{
 	}
 	
 	/**
-	 * ±ß±í½Úµã
+	 * è¾¹è¡¨èŠ‚ç‚¹
 	 * @author andy
 	 */
 	private static class EdgeNode{
@@ -213,18 +214,18 @@ class AdjacencyListGraph extends Graph{
 	}
 	
 	/**
-	 * ¶¥µã
+	 * é¡¶ç‚¹
 	 * @author andy
 	 */
 	private static class VertexNode{
 		
-		/**¶¥µã±í**/
+		/**é¡¶ç‚¹è¡¨**/
 		String vertex;
 		
-		/**¶¥µãÖ¸ÏòµÄµÚÒ»Ìõ±ß**/
+		/**é¡¶ç‚¹æŒ‡å‘çš„ç¬¬ä¸€æ¡è¾¹**/
 		EdgeNode firstEdge;
 		
-		/**¶¥µãËùÖ¸ÏòµÄÏÂÒ»¸ö¶¥µã**/
+		/**é¡¶ç‚¹æ‰€æŒ‡å‘çš„ä¸‹ä¸€ä¸ªé¡¶ç‚¹**/
 		VertexNode next;
 	}
 	
