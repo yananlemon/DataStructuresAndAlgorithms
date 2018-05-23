@@ -65,20 +65,20 @@ public class AdjGraph extends AbstractGraph {
 	@Override
 	public void dfs(AbstractGraph graph) {
 		
-		// 选取图顶点表中第一个节点开始遍历
+		/*// 选取图顶点表中第一个节点开始遍历
 		VertexNode temp = this.head;
 		// 扫描图中每个顶点
 		while(temp != null){
 			if(!temp.visited)
 				dfs1(graph, temp);
 			temp = temp.next;
-		}
+		}*/
 	}
 	
 	private void dfs1(AbstractGraph graph, VertexNode node) {
 		
 		// 访问顶点
-		System.out.println(node.vertex);
+		/*System.out.println(node.vertex);
 		node.visited = true;
 		EdgeNode firstEdge = node.firstEdge;
 		VertexNode temp = findByName(firstEdge.vertex);
@@ -86,7 +86,7 @@ public class AdjGraph extends AbstractGraph {
 			if(!temp.visited)
 				dfs1(graph, temp);
 			temp = temp.next;
-		}
+		}*/
 	}
 
 	/**顶点表头节点**/
@@ -133,31 +133,29 @@ public class AdjGraph extends AbstractGraph {
 		}
 	}
 	
-	/**
-	 * 边表节点
-	 * @author andy
-	 */
-	private static class EdgeNode{
-		String vertex;
-		EdgeNode next;
-	}
-	
-	/**
-	 * 顶点
-	 * @author andy
-	 */
-	private static class VertexNode{
-		
-		/**顶点表**/
-		String vertex;
-		
-		/**顶点指向的第一条边**/
-		EdgeNode firstEdge;
-		
-		/**顶点所指向的下一个顶点**/
-		VertexNode next;
-		
-		boolean visited = false;
-	}
+}
 
+/**
+ * 边表节点
+ * @author andy
+ */
+class EdgeNode{
+	String vertex;
+	EdgeNode next;
+}
+
+/**
+ * 顶点
+ * @author andy
+ */
+class VertexNode{
+	
+	/**顶点表**/
+	String vertex;
+	
+	/**顶点指向的第一条边**/
+	EdgeNode firstEdge;
+	
+	/**顶点所指向的下一个顶点**/
+	VertexNode next;
 }

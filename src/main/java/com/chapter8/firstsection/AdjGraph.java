@@ -4,72 +4,71 @@ import java.util.Scanner;
 
 /**
  * <p>AdjGraph</p>
- * <p>Ê¹ÓÃÁÚ½Ó±í±íÊ¾Í¼</p>
+ * <p>ä½¿ç”¨é‚»æ¥è¡¨è¡¨ç¤ºå›¾</p>
  * @author yanan
- * @date 2018Äê5ÔÂ21ÈÕ
+ * @date 2018å¹´5æœˆ21æ—¥
  */
 public class AdjGraph {
 
 	private static final int MAX_SIZE_OF_VERTEX = 1000;
 	
-	/*¶¥µã±í*/
-	VertexNode[] vexList = new VertexNode[MAX_SIZE_OF_VERTEX];
+	/*é¡¶ç‚¹è¡¨*/
+	private VertexNode[] vexList = new VertexNode[MAX_SIZE_OF_VERTEX];
 	
-	/*¶¥µã¸öÊı*/
+	/*é¡¶ç‚¹ä¸ªæ•°*/
 	private int n;
 	
-	/*Í¼ÖĞ±ßµÄÊıÁ¿*/
+	/*å›¾ä¸­è¾¹çš„æ•°é‡*/
 	private int e;
 	
 	public AdjGraph createGraph(){
-		AdjGraph rs = new AdjGraph();
 		Scanner in = new Scanner(System.in);
-		System.out.println("ÇëÊäÈëÍ¼ÖĞ¶¥µãµÄÊıÁ¿");
-		// 1.ÊäÈëÍ¼µÄ¶¥µã¸öÊıºÍ±ßÊı
-		rs.n = in.nextInt();
-		System.out.println("ÇëÊäÈëÍ¼ÖĞ±ßµÄÊıÁ¿");
-		rs.e = in.nextInt();
+		System.out.println("è¯·è¾“å…¥å›¾ä¸­é¡¶ç‚¹çš„æ•°é‡");
+		// 1.è¾“å…¥å›¾çš„é¡¶ç‚¹ä¸ªæ•°å’Œè¾¹æ•°
+		this.n = in.nextInt();
+		System.out.println("è¯·è¾“å…¥å›¾ä¸­è¾¹çš„æ•°é‡");
+		this.e = in.nextInt();
 		
-		// 2.½¨Á¢¶¥µã±í
-		System.out.println("ÇëÊäÈë¶¥µãÃû³Æ²¢°´»Ø³µ:");
-		for (int i = 0; i < rs.n; i++) {
+		// 2.å»ºç«‹é¡¶ç‚¹è¡¨
+		System.out.println("è¯·è¾“å…¥é¡¶ç‚¹åç§°å¹¶æŒ‰å›è½¦:");
+		for (int i = 0; i < this.n; i++) {
 			String v = in.next();
-			rs.vexList[i] = new VertexNode();
-			rs.vexList[i].vertex = v;
-			rs.vexList[i].firstEdge = null;
+			this.vexList[i] = new VertexNode();
+			this.vexList[i].vertex = v;
+			this.vexList[i].firstEdge = null;
 		}
-		System.out.println("ÇëÊäÈë¶¥µãÃû³Æ²¢°´»Ø³µ:");
-		// 3.ÖğÌõÊäÈë±ßĞÅÏ¢£¬½¨Á¢±ß±í¡£
-		for (int i = 0; i < rs.e; i++) {
-			System.out.println("ÇëÒÀ´ÎÊäÈë0,3£¨ÕâÁ½¸öÊı×Ö´ú±í±ßĞÅÏ¢£¬ÆäÖĞÃ¿¸öÊı×Ö¶¼ÊÇ¶¥µã±íÖĞµÄÒ»¸öË÷Òı£©");
+		System.out.println("è¯·è¾“å…¥é¡¶ç‚¹åç§°å¹¶æŒ‰å›è½¦:");
+		// 3.é€æ¡è¾“å…¥è¾¹ä¿¡æ¯ï¼Œå»ºç«‹è¾¹è¡¨ã€‚
+		System.out.println("è¯·ä¾æ¬¡è¾“å…¥0,3ï¼ˆè¿™ä¸¤ä¸ªæ•°å­—ä»£è¡¨è¾¹ä¿¡æ¯ï¼Œå…¶ä¸­æ¯ä¸ªæ•°å­—éƒ½æ˜¯é¡¶ç‚¹è¡¨ä¸­çš„ä¸€ä¸ªç´¢å¼•ï¼‰");
+		for (int i = 0; i < this.e; i++) {
 			String line = in.next();
 			String[] array = line.split(",");
 			int tail = Integer.parseInt(array[0]);
 			int head = Integer.parseInt(array[1]);
-			// ½¨Á¢±ß½Úµã
+			// å»ºç«‹è¾¹èŠ‚ç‚¹
 			EdgeNode edgeNode = new EdgeNode();
 			edgeNode.index = head;
-			edgeNode.next = rs.vexList[tail].firstEdge;
-			rs.vexList[tail].firstEdge = edgeNode;
+			edgeNode.next = this.vexList[tail].firstEdge;
+			this.vexList[tail].firstEdge = edgeNode;
 			
 			edgeNode = new EdgeNode();
 			edgeNode.index = tail;
-			edgeNode.next = rs.vexList[head].firstEdge;
-			rs.vexList[head].firstEdge = edgeNode;
+			edgeNode.next = this.vexList[head].firstEdge;
+			this.vexList[head].firstEdge = edgeNode;
 			
 		}
 		in.close();
-		System.out.println("Í¼ÒÑ¾­³É¹¦½¨Á¢£¬ĞÅÏ¢ÈçÏÂ");
-		for (int i = 0; i < rs.n; i++) {
-			System.out.printf("%d:%s->",i,rs.vexList[i].vertex);
-			EdgeNode node = rs.vexList[i].firstEdge;
+		System.out.println("å›¾å·²ç»æˆåŠŸå»ºç«‹ï¼Œä¿¡æ¯å¦‚ä¸‹");
+		for (int i = 0; i < this.n; i++) {
+			System.out.printf("%d:%s->",i,this.vexList[i].vertex);
+			EdgeNode node = this.vexList[i].firstEdge;
 			while(node != null){
-				System.out.printf("%s->",rs.vexList[node.index].vertex);
+				System.out.printf("%s->",this.vexList[node.index].vertex);
 				node = node.next;
 			}
 			System.out.println("");
 		}
-		return rs;
+		return this;
 	}
 	
 	public static void main(String[] args) {
@@ -77,23 +76,30 @@ public class AdjGraph {
 		graph.createGraph();
 	}
 
-}
-/**
- * Í¼ÖĞ¶¥µãÀà
- * @author andy
- */
-class VertexNode{
-	String vertex;//¶¥µãĞÅÏ¢
-	EdgeNode firstEdge;//±ßÁ´±íÍ·Ö¸Õë
-}
+	public VertexNode[] getVexList() {
+		return vexList;
+	}
 
-/**
- * Í¼ÖĞ±ßÀà
- * @author andy
- *
- */
-class EdgeNode{
-	int index;	//¶¥µãÏÂ±ê
-	int weight;	//±ßÉÏµÄÈ¨Öµ
-	EdgeNode next;//Ö¸ÏòÏÂÒ»¸ö½Úµã
+	public void setVexList(VertexNode[] vexList) {
+		this.vexList = vexList;
+	}
+
+	public int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		this.n = n;
+	}
+
+	public int getE() {
+		return e;
+	}
+
+	public void setE(int e) {
+		this.e = e;
+	}
+	
+	
+
 }
