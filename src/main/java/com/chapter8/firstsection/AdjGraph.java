@@ -21,6 +21,32 @@ public class AdjGraph {
 	/*图中边的数量*/
 	private int e;
 	
+	public AdjGraph(int n,int e){
+		this.n = n;
+		this.e = e;
+		for (int i = 0; i < this.n; i++) {
+			this.vexList[i] = new VertexNode();
+		}
+	}
+	
+	public void addVertex(String vertex,int pos){
+		vexList[pos].setVertex(vertex);
+	}
+	
+	public void addEdge(int startVextex,int endVextex){
+		// 建立边节点
+		EdgeNode edgeNode = new EdgeNode();
+		edgeNode.index = startVextex;
+		edgeNode.next = this.vexList[endVextex].firstEdge;
+		this.vexList[endVextex].firstEdge = edgeNode;
+		
+		edgeNode = new EdgeNode();
+		edgeNode.index = endVextex;
+		edgeNode.next = this.vexList[startVextex].firstEdge;
+		this.vexList[startVextex].firstEdge = edgeNode;
+	}
+	
+	
 	public AdjGraph createGraph(){
 		Scanner in = new Scanner(System.in);
 		System.out.println("请输入图中顶点的数量");
@@ -59,6 +85,11 @@ public class AdjGraph {
 		}
 		in.close();
 		System.out.println("图已经成功建立，信息如下");
+		showGraph();
+		return this;
+	}
+
+	public void showGraph() {
 		for (int i = 0; i < this.n; i++) {
 			System.out.printf("%d:%s->",i,this.vexList[i].vertex);
 			EdgeNode node = this.vexList[i].firstEdge;
@@ -68,12 +99,6 @@ public class AdjGraph {
 			}
 			System.out.println("");
 		}
-		return this;
-	}
-	
-	public static void main(String[] args) {
-		AdjGraph graph = new AdjGraph();
-		graph.createGraph();
 	}
 
 	public VertexNode[] getVexList() {
