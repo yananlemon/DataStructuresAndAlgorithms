@@ -39,6 +39,15 @@ public class Stack<Item> implements Iterable<Item>{
 		return item;
 	}
 	
+	/**
+	 * 
+	 * 返回栈顶元素但不弹出
+	 * @return Item
+	 */
+	public Item peek(){
+		return head == null ? null :head.val;
+	}
+	
 	public boolean isEmpty(){
 		return size == 0 ? true : false; 
 	}
@@ -60,6 +69,7 @@ public class Stack<Item> implements Iterable<Item>{
 		stack.push("a");
 		stack.push("b");
 		stack.push("c");
+		System.out.println(stack.peek());
 		for(String s : stack)
 			System.out.println(s);
 	}
