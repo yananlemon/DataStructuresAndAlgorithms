@@ -1,8 +1,10 @@
 package algorithms.chapter1;
 
+import java.util.Arrays;
+
 /**
  * 
- * 保持字符串的固定容量的栈
+ * 保存字符串的固定容量的栈
  * @author yanan
  */
 public class FixedCapacityStackOfStrings {
@@ -29,6 +31,10 @@ public class FixedCapacityStackOfStrings {
 	 * @param item 待添加的字符串
 	 */
 	public void push(String item) {
+		if(size()==array.length-1){
+			int newLen=(array.length-1)<<1;
+			array=Arrays.copyOf(array, newLen);
+		}
 		array[size++] = item;
 	}
 	
