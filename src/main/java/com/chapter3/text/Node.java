@@ -21,4 +21,12 @@ public class Node{
 		this.next = next;
 	}
 	
+	public static void main(String[] args) {
+		Node z = new Node(3, null);
+		Node y = new Node(2, z);
+		Node x = new Node(1, y);
+		x.next = x.next.next;
+		System.out.println(y.next);
+	}
+	
 }

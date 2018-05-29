@@ -13,7 +13,7 @@ public class ReverseSingleLinkedList {
 
 	public static void main(String[] args) {
 		SingleLinkedList list=new SingleLinkedList();
-		for(int i=1;i<=30;i++){
+		for(int i=1;i<=3;i++){
 			list.addToTail(i);
 		}
 		
@@ -21,20 +21,20 @@ public class ReverseSingleLinkedList {
 		//Node reversed=reverseLinkedListWithIterator(list.getHead());
 		
 		//第2种方法
-		//Node reversed=reverseLinkedListWithRecursion(list.getHead());
+		Node reversed=reverseLinkedListWithRecursion(list.getHead());
 		
 		//第3种方法
 		//SingleLinkedList reversed=reverseLinkedList3(list);
 		
 		//第5种方法
-		SingleLinkedList reversed=reverseLinkedList5(list);
-		printList(reversed);
+		//SingleLinkedList reversed=reverseLinkedList5(list);
+		//printList(reversed);
 		
-		/*Node temp=reversed;
+		Node temp=reversed;
 		while(temp!=null){
 			System.out.println(temp.getInfo());
 			temp=temp.getNext();
-		}*/
+		}
 		
 	}
 	
