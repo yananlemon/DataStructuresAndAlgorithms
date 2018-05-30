@@ -1,12 +1,15 @@
 package com.chapter3.text;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * <p>SingleLinkedList</p>  
  * <p>保存整数的单链表 </p>  
  * @author yanan  
  * @date 2018年3月13日
  */
-public class SingleLinkedList {
+public class SingleLinkedList implements Iterable<Integer>{
 	private Node head,tail;
 	private int size;
 	public SingleLinkedList(){
@@ -178,6 +181,30 @@ public class SingleLinkedList {
 
 	public void setHead(Node head) {
 		this.head = head;
+	}
+
+	public Iterator<Integer> iterator() {
+		return new SLIterator();
+	}
+	
+	private class SLIterator implements Iterator<Integer>{
+		
+		private Node current = head;
+		
+		public boolean hasNext() {
+			if(current == null || size == 0)
+				return false;
+			return true;
+		}
+
+		public Integer next() {
+			if(!hasNext())
+				throw new NoSuchElementException();
+			Integer rs = current.getInfo();
+			current = current.next;
+			return rs;
+		}
+		
 	}
 	
 	

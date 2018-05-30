@@ -72,7 +72,8 @@ public class Bag<Item> implements Iterable<Item> {
         }
 
         public boolean hasNext()  { 
-        	return current != null;                     }
+        	return current != null;                     
+        }
         public void remove()      { 
         	throw new UnsupportedOperationException();  
         }
@@ -93,10 +94,7 @@ public class Bag<Item> implements Iterable<Item> {
      */
     public static void main(String[] args) {
         Bag<String> bag = new Bag<String>();
-        bag.add("a");
-        bag.add("b");
-        bag.add("c");
-
+       
         System.out.println("size of bag = " + bag.size());
         for (String s : bag) {
             System.out.println(s);
