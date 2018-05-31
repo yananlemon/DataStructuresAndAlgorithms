@@ -56,13 +56,17 @@ public class Graph {
 			throw new IllegalArgumentException("顶点 " + v + " 的范围不在 0 和 " + (v-1)+" 之间！");
 	}
 	
+	public int getV(){
+		return v;
+	}
+	
 	/**
 	 * 返回顶点{@code v}的邻接表
 	 * @param v 顶点
 	 * @return 顶点{@code v}的邻接表
 	 */
 	public Iterable<Integer> adj(int v){
-		return this.adj(v);
+		return this.adj[v];
 	}
 	
 	/**

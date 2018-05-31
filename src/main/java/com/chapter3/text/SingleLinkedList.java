@@ -204,6 +204,11 @@ public class SingleLinkedList implements Iterable<Integer>{
 			current = current.next;
 			return rs;
 		}
+
+		public void remove() {
+			// TODO Auto-generated method stub
+			
+		}
 		
 	}
 	
