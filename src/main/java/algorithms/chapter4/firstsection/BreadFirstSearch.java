@@ -7,7 +7,7 @@ public class BreadFirstSearch {
 
 	private boolean marked[];
 	
-	private int[] edgeTo;
+	private int[] edgeTo;//索引代表图中顶点，值代表直接到达该顶点的顶点的索引
 	private StackL<Integer> stack ;
 	
 	public BreadFirstSearch(Graph g,int start,int end) {
@@ -29,7 +29,7 @@ public class BreadFirstSearch {
 					stack.push(w);
 				}
 				stack.push(start);
-				break;
+				//break;
 			}
 			for(int w : g.adj(v)){
 				if(!marked[w]){
@@ -42,7 +42,7 @@ public class BreadFirstSearch {
 	}
 	
 	public static void main(String[] args) {
-		Graph g = new Graph(6);
+		/*Graph g = new Graph(6);
 		g.addEdge(0,5);
 		g.addEdge(2,4);
 		g.addEdge(2,3);
@@ -50,9 +50,19 @@ public class BreadFirstSearch {
 		g.addEdge(0,1);
 		g.addEdge(3,4);
 		g.addEdge(3,5);
-		g.addEdge(0,2);
+		g.addEdge(0,2);*/
+		Graph g = new Graph(12);
+		g.addEdge(2,3);
+		g.addEdge(0,6);
+		g.addEdge(3,6);
+		g.addEdge(10,3);
+		g.addEdge(2,0);
+		g.addEdge(6,2);
+		g.addEdge(5,2);
+		g.addEdge(5,10);
+		g.addEdge(5,0);
 		int start = 0;
-		int end = 4;
+		int end = 3;
 		BreadFirstSearch s = new BreadFirstSearch(g, start,end);
 		if(!s.stack.isEmpty()){
 			System.out.printf("%d到%d的最短路径如下:\n",start,end);
