@@ -68,15 +68,15 @@ public class BreadFirstPaths {
 		g.addEdge(3,4);
 		g.addEdge(3,5);
 		g.addEdge(0,2);
-		
-		BreadFirstPaths s = new BreadFirstPaths(g, 0);
+		int start = 5;
+		BreadFirstPaths s = new BreadFirstPaths(g, start);
 		for (int v = 0; v < g.getV(); v++) {
-			System.out.print("0 到 "+v+":");
+			System.out.print(start + "  到 "+v+":");
 			if(s.hasPathTo(v)){
 				StackL<Integer> paths = s.pathTo(v);
 				while(!paths.isEmpty()){
 					int x = paths.pop();
-					if(x == 0)
+					if(x == start)
 						System.out.print(x);
 					else
 						System.out.print("->"+x);

@@ -51,7 +51,7 @@ public class Graph {
 	}
 
 
-	private void validateVertex(int v2) {
+	public void validateVertex(int v2) {
 		if(v2 <0 || v2 >= this.v)
 			throw new IllegalArgumentException("顶点 " + v + " 的范围不在 0 和 " + (v-1)+" 之间！");
 	}
@@ -105,7 +105,7 @@ public class Graph {
      * @return the number of vertices <em>V</em>, followed by the number of edges <em>E</em>,
      *         followed by the <em>V</em> adjacency lists
      */
-    public String toString() {
+    public String graph() {
         StringBuilder s = new StringBuilder();
         s.append(v + " 个顶点, " + e + " 条边 " + NEWLINE);
         for (int i = 0; i < v; i++) {
@@ -117,6 +117,13 @@ public class Graph {
         }
         return s.toString();
     }
+    
+    
+
+	@Override
+	public String toString() {
+		return graph();
+	}
 
 	public static void main(String[] args) {
 		/*Graph g = new Graph(5);
