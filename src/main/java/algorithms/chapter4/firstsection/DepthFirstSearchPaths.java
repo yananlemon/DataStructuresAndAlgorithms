@@ -16,6 +16,7 @@ public class DepthFirstSearchPaths {
 		edgeTo = new int[g.getV()];
 		this.start = start;
 		dfs(g, start);
+		System.out.println(edgeTo);
 	}
 	
 	private void dfs(Graph g,int v){
