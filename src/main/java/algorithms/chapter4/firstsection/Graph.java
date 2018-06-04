@@ -49,6 +49,16 @@ public class Graph {
 		adj[v].addToHead(w);
 		adj[w].addToHead(v);
 	}
+	
+	/**
+	 * 
+	 * 删除顶点及其相连的所有边
+	 * @param v
+	 */
+	public void deleteVertex(int v) {
+		validateVertex(v);
+		this.adj[v] = null;
+	}
 
 
 	public void validateVertex(int v2) {
@@ -66,7 +76,8 @@ public class Graph {
 	 * @return 顶点{@code v}的邻接表
 	 */
 	public Iterable<Integer> adj(int v){
-		return this.adj[v];
+		Iterable<Integer> it = this.adj[v];
+		return it;
 	}
 	
 	/**

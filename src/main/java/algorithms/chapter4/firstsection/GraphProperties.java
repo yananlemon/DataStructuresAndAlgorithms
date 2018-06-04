@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import com.chapter4.text.QueueV;
 import com.chapter4.text.StackL;
-
+/**
+ * GraphProperties
+ * @author yanan
+ */
 public class GraphProperties {
 	
 	private Graph graph;
