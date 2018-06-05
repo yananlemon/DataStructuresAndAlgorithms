@@ -41,6 +41,16 @@ public class Graph {
 		}
 	}
 	
+	/**
+	 * 
+	 * 从输入流中创建图对象
+	 * 输入流格式如下
+	 * 5 6(V,E)
+	 * 0,1
+	 * 3,4
+	 * ...
+	 * @param in
+	 */
 	public Graph(InputStream in){
 		byte[] data = new byte[1024];
 		int i = -1;

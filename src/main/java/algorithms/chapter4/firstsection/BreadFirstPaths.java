@@ -68,7 +68,7 @@ public class BreadFirstPaths {
 		g.addEdge(3,4);
 		g.addEdge(3,5);
 		g.addEdge(0,2);*/
-		Graph g = new Graph(8);
+		/*Graph g = new Graph(8);
 		g.addEdge(0,1);
 		g.addEdge(1,2);
 		g.addEdge(2,3);
@@ -76,8 +76,18 @@ public class BreadFirstPaths {
 		g.addEdge(4,5);
 		g.addEdge(5,6);
 		g.addEdge(6,7);
-		System.out.println(g);
+		System.out.println(g);*/
+		Graph g = new Graph(7);
+		g.addEdge(0,1);
+		g.addEdge(0,4);
+		g.addEdge(1,5);
+		g.addEdge(1,2);
+		g.addEdge(5,4);
+		g.addEdge(4,6);
+		g.addEdge(4,3);
+		g.addEdge(2,3);
 		int start = 0;
+		System.out.println(g);
 		BreadFirstPaths s = new BreadFirstPaths(g, start);
 		for (int v = 0; v < g.getV(); v++) {
 			System.out.print(start + "  到 "+v+":");
