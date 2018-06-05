@@ -55,6 +55,17 @@ public class BreadFirstPaths {
 		path.push(start);
 		return path;
 	}
+	
+	public int distTo(int t) {
+		int len = -1;
+		if(!hasPathTo(t))
+			return -1;
+		for(int x = t; x != start; x = edgeTo[x]){
+			len++;
+		}
+		len++;
+		return len;
+	}
 
 
 
@@ -89,6 +100,7 @@ public class BreadFirstPaths {
 		int start = 0;
 		System.out.println(g);
 		BreadFirstPaths s = new BreadFirstPaths(g, start);
+		System.out.println(s.distTo(5));
 		for (int v = 0; v < g.getV(); v++) {
 			System.out.print(start + "  到 "+v+":");
 			if(s.hasPathTo(v)){
