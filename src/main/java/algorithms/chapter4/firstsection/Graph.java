@@ -1,6 +1,12 @@
 package algorithms.chapter4.firstsection;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import com.chapter3.text.SingleLinkedList;
 
 /**
@@ -32,6 +38,33 @@ public class Graph {
 		this.adj = new SingleLinkedList[v];
 		for (int i = 0; i < v; i++) {
 			adj[i] = new SingleLinkedList();
+		}
+	}
+	
+	public Graph(InputStream in){
+		byte[] data = new byte[1024];
+		int i = -1;
+		StringBuilder sb = new StringBuilder();
+		try{
+			while((i=in.read(data,0,data.length)) != -1){
+				String str = new String(data,0,i,"UTF-8");
+				sb.append(str);
+			}
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		String[] info = sb.toString().split(" |\r\n");
+		this.v = Integer.parseInt(info[0]);
+		this.adj = new SingleLinkedList[v];
+		for (int k = 0; k < v; k++) {
+			adj[k] = new SingleLinkedList();
+		}
+		int index = 2;
+		for (int k = 0; k < Integer.parseInt(info[1]); k++) {
+			String[] edge = info[index++].split(",");
+			Integer v = Integer.parseInt(edge[0]);
+			Integer w = Integer.parseInt(edge[1]);
+			addEdge(v, w);
 		}
 	}
 
@@ -144,7 +177,7 @@ public class Graph {
 		g.addEdge(1,4);
 		g.addEdge(2,3);
 		g.addEdge(2,4);*/
-		Graph g = new Graph(12);
+		/*Graph g = new Graph(12);
 		g.addEdge(8,4);
 		g.addEdge(2,3);
 		g.addEdge(1,11);
@@ -165,7 +198,17 @@ public class Graph {
 		System.out.println(g);
 		System.out.println(g.hasEdge(5, 2));
 		System.out.println(g.hasEdge(10, 2));
-		System.out.println(g.hasEdge(10, 23));
+		System.out.println(g.hasEdge(10, 23));*/
+		if(args == null || args.length != 1){
+			System.out.println("Useage:Graph D:\\Graph\\Graph.txt");
+		}
+		try {
+			Graph g = new Graph(new FileInputStream(new File(args[0])));
+			System.out.println(g);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
