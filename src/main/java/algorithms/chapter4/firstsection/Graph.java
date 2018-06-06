@@ -1,9 +1,11 @@
 package algorithms.chapter4.firstsection;
 
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -77,6 +79,34 @@ public class Graph {
 			addEdge(v, w);
 		}
 	}
+	
+	public Graph(BufferedReader reader) throws IOException{
+		StringBuilder sb = new StringBuilder();
+		try {
+			String line = null;
+			while((line = reader.readLine()) != null){
+				sb.append(line).append(NEWLINE);
+			}
+		} catch (IOException e) {
+			throw e;
+		}
+		String[] info = sb.toString().split("\r\n");
+		this.v = Integer.parseInt(info[0]);
+		this.adj = new SingleLinkedList[v];
+		this.e = Integer.parseInt(info[1]);
+		for (int k = 0; k < v; k++) {
+			adj[k] = new SingleLinkedList();
+		}
+		for (int k = 2; k < info.length; k++) {
+			String[] vAndAdj = info[k].split(" ");
+			for (int i = 0; i < vAndAdj.length - 1 ; i++) {
+				addEdge(Integer.parseInt(vAndAdj[0]), Integer.parseInt(vAndAdj[i+1]));
+			}
+			
+		}
+		System.out.println(this);
+	}
+	
 
 	/**
 	 * 添加两条边到无向图。
@@ -209,16 +239,22 @@ public class Graph {
 		System.out.println(g.hasEdge(5, 2));
 		System.out.println(g.hasEdge(10, 2));
 		System.out.println(g.hasEdge(10, 23));*/
-		if(args == null || args.length != 1){
+		/*if(args == null || args.length != 1){
 			System.out.println("Useage:Graph D:\\Graph\\Graph.txt");
 		}
 		try {
 			Graph g = new Graph(new FileInputStream(new File(args[0])));
 			System.out.println(g);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		try {
+			Graph g = new Graph(new BufferedReader(new FileReader(new File("D:\\Graph\\Graph.txt"))));
+			System.out.println(g);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 }
