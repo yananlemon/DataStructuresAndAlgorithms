@@ -1,7 +1,5 @@
 package algorithms.chapter4.thirdsection;
 
-import java.util.Arrays;
-
 import com.chapter3.text.DoublyLinkedList;
 
 public class GraphWithWeight {
@@ -38,6 +36,16 @@ public class GraphWithWeight {
 		edge = new Edge(w, v, weight);
 		this.adj[w].addToHead(edge);
 		e++;
+	}
+	
+	public boolean hasEdge(int v, int w) {
+		validateVertex(v);
+    	validateVertex(w);
+    	for(int i = 0; i < adj[v].size(); i++) {
+    		if(adj[v].get(i).getW() == w)
+    			return true;
+    	}
+    	return false;
 	}
 	
 	public void validateVertex(int v2) {
@@ -84,5 +92,15 @@ public class GraphWithWeight {
 		g.addEdge(5,4,2 );
 		g.addEdge(6,5,9 );
 		System.out.println(g);
+	}
+
+	public double getWeight(Integer v, Integer w) {
+		validateVertex(v);
+    	validateVertex(w);
+    	for(int i = 0; i < adj[v].size(); i++) {
+    		if(adj[v].get(i).getW() == w)
+    			return adj[v].get(i).getWeight();
+    	}
+		return -1;
 	}
 }
