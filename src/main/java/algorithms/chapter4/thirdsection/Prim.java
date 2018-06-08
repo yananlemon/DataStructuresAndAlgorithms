@@ -12,7 +12,10 @@ public class Prim {
 	private ArrayList<Integer> vertexes = new ArrayList<Integer>();
 	
 	/**用于存储加权无向图中除了最小生成树的顶点之外的顶点**/
-	private ArrayList<Integer> others = new ArrayList<Integer>();
+	private ArrayList<Integer> 	others  = new ArrayList<Integer>();
+	
+	/**用于存储加权无向图最小生成树的边集**/
+	private ArrayList<Edge> 	edges   = new ArrayList<Edge>();
 	
 	private GraphWithWeight graph;
 	
@@ -61,6 +64,7 @@ public class Prim {
 	private int findMinWeightWithVertex(ArrayList<Integer> u,ArrayList<Integer> v) throws Exception{
 		double weight = 99999;
 		int rs = -1;
+		int v1 = -1;
 		for (int i = 0; i < u.size(); i++) {
 			for (int k = 0; k < v.size(); k++) {
 				if(graph.hasEdge(u.get(i), v.get(k)) ) {
@@ -68,11 +72,14 @@ public class Prim {
 					if(edgeWeight < weight) {
 						weight = edgeWeight;
 						rs = v.get(k);//更新顶点
+						v1 = u.get(i);
 					}
 				}
 			}
 		}
 		totalWeight += weight;
+		Edge edge = new Edge(v1, rs, weight);
+		this.edges.add(edge);
 		return rs;
 	}
 	
@@ -100,7 +107,7 @@ public class Prim {
 		g.addEdge(2,4,5 );
 		g.addEdge(5,4,2 );
 		g.addEdge(6,5,9 );*/
-		GraphWithWeight g = new GraphWithWeight(6);
+		/*GraphWithWeight g = new GraphWithWeight(6);
 		g.addEdge(0,1,6);
 		g.addEdge(0,2,1);
 		g.addEdge(0,3,5);
@@ -110,11 +117,24 @@ public class Prim {
 		g.addEdge(5,2,4);
 		g.addEdge(5,4,6);
 		g.addEdge(4,2,6);
-		g.addEdge(4,1,3);
+		g.addEdge(4,1,3);*/
+		GraphWithWeight g = new GraphWithWeight(8);
+		g.addEdge(0,1,2);
+		g.addEdge(0,2,3);
+		g.addEdge(1,3,2);
+		g.addEdge(2,3,1);
+		g.addEdge(3,4,2);
+		g.addEdge(3,5,4);
+		g.addEdge(4,5,1);
+		g.addEdge(4,6,2);
+		g.addEdge(6,7,3);
+		g.addEdge(7,5,1);
+		g.addEdge(5,6,2);
 		
 		System.out.println(g);
 		Prim p = new Prim(g, 0);
-		System.out.println("最小生成树是："+p.vertexes);
+		System.out.println("最小生成树的顶点是："+p.vertexes);
+		System.out.println("最小生成树的边是："+p.edges);
 
 		System.out.println("权重是："+p.totalWeight);
 	}

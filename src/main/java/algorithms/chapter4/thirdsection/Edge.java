@@ -44,5 +44,11 @@ public class Edge {
 	public double getWeight() {
 		return weight;
 	}
+
+	@Override
+	public String toString() {
+		return "Edge [v=" + v + "->w=" + w + ":weight=" + weight + "]";
+	}
+	
 	
 }
