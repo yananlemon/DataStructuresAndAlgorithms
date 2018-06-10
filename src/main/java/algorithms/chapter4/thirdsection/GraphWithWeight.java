@@ -38,6 +38,17 @@ public class GraphWithWeight {
 		e++;
 	}
 	
+	/*public void addEdge(Edge edge){
+		validateVertex(edge.getV());
+		validateVertex(edge.getW());
+		this.adj[edge.getV()].addToHead(edge);
+		e++;
+	}*/
+	
+	public int getE() {
+		return e;
+	}
+	
 	public boolean hasEdge(int v, int w) {
 		validateVertex(v);
     	validateVertex(w);
@@ -59,6 +70,20 @@ public class GraphWithWeight {
 	
 	public DoublyLinkedList<Edge> adj(int v){
 		return adj[v];
+	}
+	
+	/**
+	 * 返回顶点{@code v}的度
+	 * @param v
+	 * @return
+	 */
+	public int degree(int v) {
+		validateVertex(v);
+		return adj[v].size();
+	}
+	
+	public DoublyLinkedList<Edge>[] getAdj(){
+		return this.adj;
 	}
 	
 	

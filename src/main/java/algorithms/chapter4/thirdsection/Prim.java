@@ -94,7 +94,7 @@ public class Prim {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		/*GraphWithWeight g = new GraphWithWeight(7);
+		GraphWithWeight g = new GraphWithWeight(7);
 		g.addEdge(0,1,12 );
 		g.addEdge(1,2,10 );
 		g.addEdge(2,3,3 );
@@ -106,7 +106,7 @@ public class Prim {
 		g.addEdge(5,2,6 );
 		g.addEdge(2,4,5 );
 		g.addEdge(5,4,2 );
-		g.addEdge(6,5,9 );*/
+		g.addEdge(6,5,9 );/**/
 		/*GraphWithWeight g = new GraphWithWeight(6);
 		g.addEdge(0,1,6);
 		g.addEdge(0,2,1);
@@ -118,7 +118,7 @@ public class Prim {
 		g.addEdge(5,4,6);
 		g.addEdge(4,2,6);
 		g.addEdge(4,1,3);*/
-		GraphWithWeight g = new GraphWithWeight(8);
+		/*GraphWithWeight g = new GraphWithWeight(8);
 		g.addEdge(0,1,2);
 		g.addEdge(0,2,3);
 		g.addEdge(1,3,2);
@@ -129,7 +129,7 @@ public class Prim {
 		g.addEdge(4,6,2);
 		g.addEdge(6,7,3);
 		g.addEdge(7,5,1);
-		g.addEdge(5,6,2);
+		g.addEdge(5,6,2);*/
 		
 		System.out.println(g);
 		Prim p = new Prim(g, 0);
