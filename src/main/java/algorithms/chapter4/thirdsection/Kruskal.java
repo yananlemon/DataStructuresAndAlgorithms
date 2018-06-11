@@ -85,7 +85,6 @@ public class Kruskal {
 		ArrayList<Edge> rs = new ArrayList<Edge>();
 		ArrayList<Edge> rs1 = new ArrayList<Edge>();
 		DoublyLinkedList<Edge>[] adj = this.graph.getAdj();
-		Set<Edge> sets = new HashSet<Edge>();
 		for (int i = 0; i < adj.length; i++) {
 			for (int j = 0; j < adj[i].size(); j++) {
 				Edge other = adj[i].get(j);
@@ -104,8 +103,6 @@ public class Kruskal {
 			}
 		}
 		rs.removeAll(rs1);
-		for(Edge e : sets)
-			rs.add(e);
 		Collections.sort(rs,new Comparator<Edge>() {
 			public int compare(Edge o1, Edge o2) {
 				if(o1.getWeight() > o2.getWeight())

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import com.chapter3.text.SingleLinkedList;
 
@@ -25,6 +26,8 @@ public class Graph {
 	private int e;
 
 	private SingleLinkedList[] adj;
+	
+	private ArrayList<Integer[]> edges = new ArrayList<Integer[]>();
 
 	/**
 	 * 根据{@code v}初始化一个空的图对象。
@@ -119,6 +122,10 @@ public class Graph {
 		e++;
 		adj[v].addToHead(w);
 		adj[w].addToHead(v);
+		Integer[] edge = new Integer[2];
+		edge[0] = v;
+		edge[1] =w;
+		edges.add(edge);
 	}
 	
 	/**
@@ -141,6 +148,14 @@ public class Graph {
 		return v;
 	}
 	
+	public int getE(){
+		return e;
+	}
+	
+	public ArrayList<Integer[]> getEdges() {
+		return edges;
+	}
+
 	/**
 	 * 返回顶点{@code v}的邻接表
 	 * @param v 顶点
