@@ -64,9 +64,6 @@ public class Dijkstra {
 				System.out.printf("顶点%d到顶点%d的最短距离%9.2f\n",start,i,shortestPath[i]);
 			}
 		}
-		for (int i = 0; i < edgeTo.length; i++) {
-			System.out.println(edgeTo[i]);
-		}
 	}
 	
 	public void showAllShortestPathInGraph(DirectedWeightedGraph graph,int start){
@@ -125,8 +122,10 @@ public class Dijkstra {
 		graph.addEdge(3, 2, 20);
 		graph.addEdge(3, 4, 60);
 		System.out.println(graph);
-		Dijkstra d = new Dijkstra(graph, 0);
-		d.showShortestPathBetweenFromAndTo(graph, 0, 2);
+		int start = 0;
+		int end = 4;
+		Dijkstra d = new Dijkstra(graph, start);
+		d.showShortestPathBetweenFromAndTo(graph, start, end);
 	}
 
 }
