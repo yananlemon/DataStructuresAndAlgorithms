@@ -24,7 +24,7 @@ public class StackL<T> extends AbstractStack<T> {
 
 	@Override
 	public int size() {
-		return 0;
+		return this.dll.size();
 	}
 
 	@Override
