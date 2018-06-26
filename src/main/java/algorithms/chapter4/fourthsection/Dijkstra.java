@@ -50,6 +50,7 @@ public class Dijkstra {
 				}
 				
 			}
+			System.out.println(w+1);
 			for (int i = 0; i < v_s.size(); i++) {
 				int v = v_s.get(i);
 				if(shortestPath[w] + graph.getWeight(w, v) < shortestPath[v]){
@@ -103,16 +104,17 @@ public class Dijkstra {
 	}
 	
 	public static void main(String[] args) {
-		/*DirectedWeightedGraph graph = new DirectedWeightedGraph(6);
-		graph.addEdge(0, 2, 10);
-		graph.addEdge(0, 4, 30);
-		graph.addEdge(0, 5, 100);
-		graph.addEdge(1, 2, 5);
-		graph.addEdge(2, 3, 50);
-		graph.addEdge(3, 5, 10);
-		graph.addEdge(4, 3, 20);
-		graph.addEdge(4, 5, 60);*/
-		DirectedWeightedGraph graph = new DirectedWeightedGraph(5);
+		DirectedWeightedGraph graph = new DirectedWeightedGraph(6);
+		graph.addEdge(0, 2, 15);
+		graph.addEdge(0, 1, 20);
+		graph.addEdge(1, 4, 10);
+		graph.addEdge(1, 5, 30);
+		graph.addEdge(2, 1, 4);
+		graph.addEdge(2, 5, 10);
+		graph.addEdge(4, 3, 15);
+		graph.addEdge(5, 4, 10);
+		graph.addEdge(5, 3, 4);
+		/*DirectedWeightedGraph graph = new DirectedWeightedGraph(5);
 		graph.addEdge(0, 1, 10);
 		graph.addEdge(0, 3, 30);
 		graph.addEdge(0, 4, 100);
@@ -120,7 +122,7 @@ public class Dijkstra {
 		graph.addEdge(2, 3, 20);
 		graph.addEdge(2, 4, 10);
 		graph.addEdge(3, 2, 20);
-		graph.addEdge(3, 4, 60);
+		graph.addEdge(3, 4, 60);*/
 		System.out.println(graph);
 		int start = 0;
 		int end = 4;
