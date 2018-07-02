@@ -113,7 +113,7 @@ public class Dijkstra {
 		graph.addEdge(4, 3, 15);
 		graph.addEdge(5, 4, 10);
 		graph.addEdge(5, 3, 4);*/
-		DirectedWeightedGraph graph = new DirectedWeightedGraph(5);
+		/*DirectedWeightedGraph graph = new DirectedWeightedGraph(5);
 		graph.addEdge(0, 1, 10);
 		graph.addEdge(0, 3, 30);
 		graph.addEdge(0, 4, 100);
@@ -121,10 +121,14 @@ public class Dijkstra {
 		graph.addEdge(2, 3, 20);
 		graph.addEdge(2, 4, 10);
 		graph.addEdge(3, 2, 20);
-		graph.addEdge(3, 4, 60);
+		graph.addEdge(3, 4, 60);*/
+		DirectedWeightedGraph graph = new DirectedWeightedGraph(3);
+		graph.addEdge(0, 1, 2);
+		graph.addEdge(0, 2, 3);
+		graph.addEdge(2, 1, -2);
 		System.out.println(graph);
 		int start = 0;
-		int end = 4;
+		int end = 1;
 		Dijkstra d = new Dijkstra(graph, start);
 		d.showShortestPathBetweenFromAndTo(graph, start, end);
 		d.showAllShortestPathInGraph(graph, start);
