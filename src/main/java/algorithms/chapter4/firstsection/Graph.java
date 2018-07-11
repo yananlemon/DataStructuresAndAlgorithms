@@ -137,6 +137,25 @@ public class Graph {
 		validateVertex(v);
 		this.adj[v] = null;
 	}
+	
+	public void deleteEdge(int v,int w) {
+		validateVertex(v);
+		validateVertex(w);
+		e--;
+		for (int i = 0; i < adj[v].size(); i++) {
+			if(adj[v].get(i) == w) {
+				adj[v].deleteNode(i);
+				break;
+			}
+		}
+		
+		for (int i = 0; i < adj[w].size(); i++) {
+			if(adj[w].get(i) == v) {
+				adj[w].deleteNode(i);
+				break;
+			}
+		}
+	}
 
 
 	public void validateVertex(int v2) {
