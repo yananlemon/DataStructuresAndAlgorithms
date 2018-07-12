@@ -1,24 +1,22 @@
 package com.chapter8.lmh;
 
 
+import algorithms.chapter1.Stack;
+
 import com.chapter4.text.MyQueue;
 
-import algorithms.chapter1.Stack;
-import algorithms.chapter4.firstsection.DepthFirstSearch;
-import algorithms.chapter4.firstsection.Graph;
-
 /**
- * <p>EulerPath</p>  
- * <p>无向图欧拉路径和欧拉回路</p>  
+ * <p>DirectedGraphEulerPath</p>  
+ * <p>有向图欧拉路径和欧拉回路</p>  
  * @author yanan  
  * @date 2018年7月12日
  */
-public class EulerPath {
+public class DirectedGraphEulerPath {
 
-	private Graph graph;
+	private DirectedGraph graph;
 	private Stack<Integer> stack = new Stack<Integer>();
 	private MyQueue<Integer> queue = new MyQueue<Integer>();
-	public EulerPath(Graph graph) {
+	public DirectedGraphEulerPath(DirectedGraph graph) {
 		this.graph = graph;
 	}
 	
@@ -33,28 +31,27 @@ public class EulerPath {
 		if(!dfs.checkWhetherConnected(graph))
 			throw new Error("不是连通图！");
 		
-		// 2.图中顶点的度是奇数的个数是2
+		// 2.图中顶点的入度和出度相等，最多存在两个这样的顶点：其中一个的出度=入度+1；另一个的入度=出度+1
 		int count = 0;
 		int start = 0;
 		int end   = 0;
+		int a = 0,b = 0;
 		for (int i = 0; i < graph.getV(); i++) {
-			int degree = graph.degree(i);
-			if(degree % 2 != 0) {
+			int input  = graph.inputDegree(i);
+			int output = graph.outputDegree(i);
+			if(input != output){
 				count++;
-				start = i;
+				if(input + 1 == output)
+					a++;
+				if(output + 1 == input)
+					b++;
 			}
-		}
-		
-		for (int i = 0; i < graph.getV(); i++) {
-			int degree = graph.degree(i);
-			if(degree % 2 != 0 && i != start) {
-				end = i;
-			}
+			
 		}
 		if(count == 0) {
 			System.out.println("存在欧拉回路：");
 			hierholzer(0);
-		}else if(count == 2){
+		}else if(a == 1 && b == 1){
 			hierholzer(start);
 			if(queue.firstEl() == end) {
 				System.out.println("存在欧拉路径：");
@@ -93,39 +90,54 @@ public class EulerPath {
 	}
 	
 	public static void main(String[] args) {
-		/*************************测试欧拉回路*******************************/
-		//对应第十五题图片图a
-		/*Graph graph = new Graph(5);
-		graph.addEdge(0, 1);
-		graph.addEdge(1, 2);
-		graph.addEdge(2, 4);
-		graph.addEdge(4, 3);
-		graph.addEdge(3, 0);*/
-		
-		//对应第十五题图片图b&&图c
-		/*Graph graph = new Graph(4);
-		graph.addEdge(0, 1);
-		graph.addEdge(1, 2);
-		graph.addEdge(2, 3);
-		graph.addEdge(1, 3);
-		graph.addEdge(0, 2);
-		EulerPath euler = new EulerPath(graph);
-		Stack<Integer> path = euler.getEulerPath();
-*/		
-		Graph graph = new Graph(5);
-		graph.addEdge(0, 1);
-		graph.addEdge(0, 4);
-		graph.addEdge(1, 2);
-		//graph.addEdge(1, 3);
-		graph.addEdge(1, 4);
-		graph.addEdge(2, 4);
-		graph.addEdge(3, 4);
-		System.out.println(graph);
-		EulerPath euler = new EulerPath(graph);
+		/*************************测试欧拉路径*******************************/
+		DirectedGraph dGraph = new DirectedGraph(6);
+		dGraph.addEdge(0, 1);
+		dGraph.addEdge(1, 4);
+		dGraph.addEdge(2, 3);
+		dGraph.addEdge(3, 1);
+		dGraph.addEdge(3, 4);//注释掉这行，该有向图则不存在欧拉路径
+		dGraph.addEdge(4, 0);
+		dGraph.addEdge(4, 5);
+		dGraph.addEdge(5, 2);
+		System.out.println(dGraph);
+		DirectedGraphEulerPath euler = new DirectedGraphEulerPath(dGraph);
 		Stack<Integer> path = euler.getEulerPath();
 		while(!path.isEmpty()) {
 			System.out.print(path.pop() + ",");
 		}
 	}
+
+}
+
+class DepthFirstSearch {
+	
+	private boolean marked[];
+	
+	private int count;
+	
+	
+	public DepthFirstSearch(DirectedGraph g) {
+		super();
+		marked = new boolean[g.getV()];
+	}
+	
+	public void dfs(DirectedGraph g,int v){
+		marked[v] = true;
+		count++;
+		for (int w: g.adj(v)) {
+			if(!marked[w]){
+				dfs(g,w);
+			}
+		}
+	}
+	
+	public boolean checkWhetherConnected(DirectedGraph g){
+		dfs(g, 0);
+		if(count == g.getV())
+			return true;
+		return false;
+	}
+
 
 }
