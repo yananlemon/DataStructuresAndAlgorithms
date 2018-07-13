@@ -8,7 +8,7 @@ import com.chapter3.text.DoublyLinkedList;
  * <p>ADJWeightDirectedGraph</p>  
  * <p>带权有向图之邻接表实现</p>  
  * @author yanan  
- * @date 2018年7月12日
+ * @date 2018年7月13日
  */
 public class ADJWeightDirectedGraph {
 	private static final String NEWLINE = System.getProperty("line.separator"); // 换行符
@@ -38,7 +38,7 @@ public class ADJWeightDirectedGraph {
 		if(vertexesMap.get(v1) == null){
 			vertexesMap.put(v1, index++);
 		}
-		if(vertexesMap.get(v1) == null){
+		if(vertexesMap.get(v2) == null){
 			vertexesMap.put(v2, index++);
 		}
 		vertex = new Vertex(index, v2, weight);
