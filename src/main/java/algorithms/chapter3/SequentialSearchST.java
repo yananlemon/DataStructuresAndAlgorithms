@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 
 /**
- * »ùÓÚÁ´±íµÄË³Ğò²éÕÒ
+ * åŸºäºé“¾è¡¨çš„é¡ºåºæŸ¥æ‰¾
  * @author andy
  *
- * @param <Key>	·ûºÅ±íÖĞµÄ¼ü
- * @param <Value>	¼üËù¶ÔÓ¦µÄÖµ
+ * @param <Key>	ç¬¦å·è¡¨ä¸­çš„é”®
+ * @param <Value>	é”®æ‰€å¯¹åº”çš„å€¼
  */
 public class SequentialSearchST<Key,Value>{
 
@@ -66,7 +66,7 @@ public class SequentialSearchST<Key,Value>{
 	
 	public void delete(Key key){
 		if( get(key) == null)
-			throw new Error("·ûºÅ±íÖĞ²»´æÔÚ¸Ã¼ü:"+key.toString());
+			throw new Error("ç¬¦å·è¡¨ä¸­ä¸å­˜åœ¨è¯¥é”®:"+key.toString());
 		else{
 			Node<Key,Value> temp = first;
 			while( temp != null){

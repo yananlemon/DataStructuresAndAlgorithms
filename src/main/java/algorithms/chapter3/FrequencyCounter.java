@@ -12,7 +12,7 @@ public class FrequencyCounter {
 			else
 				st.put(word, st.get(word)+1);
 		}
-		System.out.print("单词频率如下：");
+		System.out.print("鍗曡瘝棰戠巼濡備笅:");
 		for(String word : st.keys())
 			System.out.println( word + ":" + st.get(word));
 		System.out.println(st.size());
