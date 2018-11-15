@@ -9,7 +9,7 @@ public interface SymbolTable<Key,Value> {
 
 	public void put(Key key,Value val);
 	
-	public Key get(Key key);
+	public Value get(Key key);
 	
 	public void delete(Key key);
 	

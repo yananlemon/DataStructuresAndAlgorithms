@@ -1,5 +1,6 @@
 package algorithms.chapter3.practice;
 
+import java.util.ArrayList;
 
 /**
  * 符号表之有序链表实现
@@ -17,6 +18,7 @@ public class OrderedSequentialSearchST<Key extends Comparable<Key>,Value>  imple
 		
 	}
 	
+	@SuppressWarnings("hiding")
 	private class Node<Key,Value>{
 		Key key;
 		Value val;
@@ -26,76 +28,104 @@ public class OrderedSequentialSearchST<Key extends Comparable<Key>,Value>  imple
 			super();
 			this.key = key;
 			this.val = val;
-			this.next = next;
 		}
 		
 	}
 	
 	
 	public void put(Key key, Value val) {
-		if( tail == null)
-			tail = new Node<Key, Value>(key, val,null, null); 
+		if( tail == null) {
+			tail = new Node<Key, Value>(key, val,null,null); 
+			size++;
+		}
 		else{
 			// 如果要添加的元素比链表尾部元素大，那么直接更新链表尾部元素
 			if( key.compareTo(tail.key) > 0){
-				Node<Key,Value> newNode = new Node<Key,Value>(key, val, tail,null);
+				Node<Key,Value> newNode = new Node<Key,Value>(key, val, null,null);
 				newNode.prev = tail;
+				tail.next = newNode;
+				tail = newNode;
+				size++;
 			}
 			// 如果要添加的元素等于链表尾部元素，那么直接更新链表尾部元素的值
 			else if( key.compareTo(tail.key) == 0 ){
 				tail.val = val;
 			}else{
-				Node<Key,Value> tempNode = tail.prev;
-				while( key.compareTo(tempNode.key) < 0 ){
-					tempNode = tempNode.prev;
+				Node<Key,Value> tempNode = tail;
+				while( true ){
+					if(key.compareTo(tempNode.key) == 0){
+						tempNode.val = val;
+						break;
+					}
+					else if( key.compareTo(tempNode.key) < 0 ) {
+						tempNode = tempNode.prev;
+					}
+					else if(key.compareTo(tempNode.key) > 0 ) {
+						Node<Key,Value> newNode = new Node<Key, Value>(key, val,null,null);
+						newNode.next=tempNode.next;
+						tempNode.next.prev=newNode;
+						tempNode.next=newNode;
+						newNode.prev=tempNode;
+						size++;
+						break;
+					}
+						
 				}
 				
 			}
 			
 		}
-		size++;
-	}
-	
-	private Node<Key,Value> getNode(Node<Key,Value> node,Key key){
-		if( key.compareTo(node.key) < 0 ){
-			return getNode(node.prev, key);
-		}
-		else if( key.compareTo(node.key) == 0 ){
-			return node;
-		}
-		else if( key.compareTo(node.key) > 0){
-			if(node.prev != null && key.compareTo(node.prev.key) > 0 )
-				return node.prev;
-			if( node.next == null)
-				return node;
-			return getNode(node.next, key);
-		}
-		return null;
 	}
 
-	public Key get(Key key) {
+	public Value get(Key key) {
+		if( this.size() == 0)
+			return null;
+		Node<Key,Value> node = tail;
+		for(int i = 0 ; i < this.size() && node != null;i++)
+			if(key.compareTo(node.key) == 0)
+				return node.val;
+			else
+				node = node.prev;
 		return null;
 	}
 
 	public void delete(Key key) {
-		
+		for( Node<Key,Value> node = tail;tail !=null && node !=null;node = node.prev)
+			if(key.compareTo(node.key) == 0) {
+				if( node.prev == null) {
+					node = node.next;
+					node.prev = null;
+				}else if(node.next == null) {
+					node = node.prev;
+					node.next = null;
+				}else {
+					node.prev.next = node.next;
+					node.next.prev = node.prev;
+				}
+				size--;
+				break;
+			}
+			
 	}
 
 	public Iterable<Key> keys() {
-		return null;
+		ArrayList<Key> keys = new ArrayList<Key>();
+		for( Node<Key,Value> node = tail; tail !=null && node !=null;node = node.prev)
+				keys.add(node.key);
+		return keys; 
 	}
 
 	public int size() {
-		return 0;
+		return size;
 	}
 
 	public static void main(String[] args) {
 		SymbolTable<String, Integer> st = new OrderedSequentialSearchST<String, Integer>();
 		st.put("a", 1);
-		st.put("b", 1);
-		st.put("c", 1);
-		st.put("z", 1);
-		st.put("d", 1);
-		System.out.println(st);
+		st.put("c", 3);
+		st.put("b", 2);
+		for(String word : st.keys())
+			System.out.println( word + ":" + st.get(word));
+		System.out.println(st.size());
 	}
 }
