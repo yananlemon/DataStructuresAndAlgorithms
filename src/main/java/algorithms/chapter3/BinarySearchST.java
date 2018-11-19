@@ -3,6 +3,7 @@ package algorithms.chapter3;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import algorithms.chapter2.Merge;
 import algorithms.chapter3.practice.SymbolTable;
 
 /**
@@ -16,18 +17,20 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 	Node<Key,Value>[] array;
 	private int size;
 	
-	private int mostFrequentIndex;
-	
 	private HashMap<Key,Integer> cache = new HashMap<Key,Integer>();
+	
+	
 	
 	public BinarySearchST() {
 		this.array = new Node[DEFAULT_SIZE];
 	}
 	
 	
-	
-	public BinarySearchST(Node<Key, Value>[] array) {
-		
+	// 3.1.12 归并排序
+	public BinarySearchST(Node[] array) {
+		Merge.sort(array);
+		this.array = array;
+		this.size = array.length;
 	}
 
 
@@ -115,7 +118,7 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 	}
 	
 	public static void main(String[] args) {
-		BinarySearchST<String, Integer> st = new BinarySearchST<String, Integer>();
+		/*BinarySearchST<String, Integer> st = new BinarySearchST<String, Integer>();
 		st.put("E", 1);
 		st.put("A", 1);
 		st.put("S", 1);
@@ -133,7 +136,18 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 		st.delete("w");
 		st.delete("z");
 		st.delete("a");
-		System.out.println(st.size());
+		System.out.println(st.size());*/
+		Node<String,Integer>[] a= new Node[5];
+		ArrayList<Node<String,Integer>> list = new ArrayList<Node<String,Integer>>();
+		list.add(new Node<String, Integer>("w", 1));
+		list.add(new Node<String, Integer>("c", 1));
+		list.add(new Node<String, Integer>("a", 1));
+		list.add(new Node<String, Integer>("d", 1));
+		list.add(new Node<String, Integer>("f", 1));
+		
+		BinarySearchST<String, Integer> st = new BinarySearchST<String, Integer>(list.toArray(a));
+		for(String key : st.keys())
+			System.out.println(key + " " + st.get(key));
 	}
 
 	public boolean contains(Key key) {
