@@ -17,4 +17,6 @@ public interface SymbolTable<Key,Value> {
 	
 	public int size();
 	
+	public boolean contains(Key key);
+	
 }

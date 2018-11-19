@@ -29,6 +29,10 @@ public class SequentialSearchST<Key,Value>{
 		
 	}
 	
+	public boolean contains(Key key) {
+		return get(key) == null ? false : true;
+	}
+	
 	public Value get(Key key){
 		Node<Key,Value> temp = first;
 		while( temp != null){

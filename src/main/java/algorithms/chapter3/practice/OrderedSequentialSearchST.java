@@ -128,4 +128,9 @@ public class OrderedSequentialSearchST<Key extends Comparable<Key>,Value>  imple
 			System.out.println( word + ":" + st.get(word));
 		System.out.println(st.size());
 	}
+
+	public boolean contains(Key key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

@@ -1,6 +1,7 @@
 package algorithms.chapter3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import algorithms.chapter3.practice.SymbolTable;
 
@@ -14,6 +15,10 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 	private static final int DEFAULT_SIZE = 10;
 	Node<Key,Value>[] array;
 	private int size;
+	
+	private int mostFrequentIndex;
+	
+	private HashMap<Key,Integer> cache = new HashMap<Key,Integer>();
 	
 	public BinarySearchST() {
 		this.array = new Node[DEFAULT_SIZE];
@@ -34,12 +39,15 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 		int index = recursionIndex(array, key, 0, size-1);
 		if(index < size() && array[index].key.compareTo(key) == 0){
 			array[index].value = val;
+			cache.put(key, index);
 			return;
 		}
 		for( int j = size; j > index; j--){
 			array[j] = array[j-1];
+			cache.put(key, j);
 		}
 		array[index] = new Node<Key, Value>(key, val);
+		cache.put(key, index);
 		size++;
 		
 	}
@@ -63,13 +71,16 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 	}
 
 	public Value get(Key key) {
+		Integer cacheIndex = cache.get(key);
+		if( cacheIndex != null )
+			return array[cacheIndex.intValue()].value;
 		int index = recursionIndex(this.array, key, 0, size());
 		return array[index].key.compareTo(key) == 0 ? array[index].value : null;
 	}
 
 	public void delete(Key key) {
 		int index = recursionIndex(this.array, key, 0, size());
-		if( array[index].key.compareTo(key) != 0)
+		if( array[index].key.compareTo(key) != 0 )
 			return;
 		for( int j = index; j < size; j++){
 			array[j] = array[j+1];
@@ -117,11 +128,16 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 		st.put("I", 1);
 		st.put("O", 1);
 		st.put("N", 1);
+		System.out.println(st.get("A"));
 		st.delete("b");
 		st.delete("w");
 		st.delete("z");
 		st.delete("a");
 		System.out.println(st.size());
+	}
+
+	public boolean contains(Key key) {
+		return get(key) == null ? false : true;
 	}
 
 }

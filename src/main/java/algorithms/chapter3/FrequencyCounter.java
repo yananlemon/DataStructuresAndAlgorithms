@@ -13,13 +13,7 @@ public class FrequencyCounter {
 		Object[] words = readWord(filename).toArray();
 		System.out.println(words.length);
 		/*String[] words = {"A","bad","beginning","makes","a","bad","ending"};*/
-		SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
-		for( Object word : words ){
-			if( st.get(word.toString()) == null)
-				st.put(word.toString(), 1);
-			else
-				st.put(word.toString(), st.get(word.toString())+1);
-		}
+		SequentialSearchST<String, Integer> st = freqCounter(words);
 		for(String word : st.keys())
 			System.out.println(word + " "+ st.get(word));
 		System.out.println("单词频率最高且长度大于等于10如下:");
@@ -35,6 +29,17 @@ public class FrequencyCounter {
 		System.out.println("长度大于等于10的单词数量："+maxArray.size());
 		for(String m : maxArray)
 			System.out.println(m+ " " + st.get(m));
+	}
+
+	private static SequentialSearchST<String, Integer> freqCounter(Object[] words) {
+		SequentialSearchST<String, Integer> st = new SequentialSearchST<String, Integer>();
+		for( Object word : words ){
+			if( st.get(word.toString()) == null)
+				st.put(word.toString(), 1);
+			else
+				st.put(word.toString(), st.get(word.toString())+1);
+		}
+		return st;
 	}
 	
 	static ArrayList<String> readWord(String filename){
