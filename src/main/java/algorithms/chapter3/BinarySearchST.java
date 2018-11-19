@@ -105,10 +105,18 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 	
 	public static void main(String[] args) {
 		BinarySearchST<String, Integer> st = new BinarySearchST<String, Integer>();
-		st.put("w", 1);
-		st.put("b", 1);
-		st.put("z", 1);
-		st.put("a", 1);
+		st.put("E", 1);
+		st.put("A", 1);
+		st.put("S", 1);
+		st.put("Y", 1);
+		st.put("Q", 1);
+		st.put("U", 1);
+		st.put("E", 1);
+		st.put("S", 1);
+		st.put("T", 1);
+		st.put("I", 1);
+		st.put("O", 1);
+		st.put("N", 1);
 		st.delete("b");
 		st.delete("w");
 		st.delete("z");
