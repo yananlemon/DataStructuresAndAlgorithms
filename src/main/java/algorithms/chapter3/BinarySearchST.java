@@ -24,15 +24,15 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 		this.array = new Node[DEFAULT_SIZE];
 	}
 	
-	private class Node<Key,Value>{
-		Key key;
-		Value value;
-		public Node(Key key, Value value) {
-			this.key = key;
-			this.value = value;
-		}
+	
+	
+	public BinarySearchST(Node<Key, Value>[] array) {
 		
 	}
+
+
+
+	
 	
 	public void put(Key key, Value val) {
 		// 查找键，找到则更新值，否则创建新的元素
