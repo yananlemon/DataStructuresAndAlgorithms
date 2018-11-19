@@ -30,19 +30,14 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 	}
 	
 	public void put(Key key, Value val) {
-		if( isEmpty()){
-			array[size++] = new Node<Key, Value>(key, val);
-			return;
-		}
+		// 查找键，找到则更新值，否则创建新的元素
 		int index = recursionIndex(array, key, 0, size-1);
 		if(index < size() && array[index].key.compareTo(key) == 0){
 			array[index].value = val;
 			return;
 		}
-		// 添加新的元素
-		
-		for( int i = size; i > index; i--){
-			array[i] = array[i-1];
+		for( int j = size; j > index; j--){
+			array[j] = array[j-1];
 		}
 		array[index] = new Node<Key, Value>(key, val);
 		size++;
@@ -57,23 +52,43 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 		if( begin > end ){
 			return begin;
 		}
-		int middle = (begin + end)/2;
+		int middle = begin + (end - begin)/2;
+		if( key.compareTo(this.array[middle].key) > 0)
+			return recursionIndex(array, key, middle + 1, end);
 		
-		if( key.compareTo(this.array[middle].key) > 0){
-			return recursionIndex(array, key, middle, end);
-		}
-		if( key.compareTo(this.array[middle].key) < 0){
-			return recursionIndex(array, key, begin, middle);
-		}
-		return middle;
+		else if( key.compareTo(this.array[middle].key) < 0)
+			return recursionIndex(array, key, begin, middle - 1);
+		else
+			return middle;
 	}
 
 	public Value get(Key key) {
-		return null;
+		int index = recursionIndex(this.array, key, 0, size());
+		return array[index].key.compareTo(key) == 0 ? array[index].value : null;
 	}
 
 	public void delete(Key key) {
-		
+		int index = recursionIndex(this.array, key, 0, size());
+		if( array[index].key.compareTo(key) != 0)
+			return;
+		for( int j = index; j < size; j++){
+			array[j] = array[j+1];
+		}
+		size--;
+	}
+	
+	/**
+	 * 返回此符号表中小于或等于{@code key}的最大键。
+	 * @param key
+	 * @return
+	 */
+	public Key floor(Key key){
+		int index = recursionIndex(this.array, key, 0, size());
+		if( array[index].key.compareTo(key) != 0)
+			return array[index].key;
+		if( index == 0 )
+			return null;
+		return array[index-1].key;
 	}
 
 	public Iterable<Key> keys() {
@@ -90,10 +105,14 @@ public class BinarySearchST<Key extends Comparable<Key>,Value> implements Symbol
 	
 	public static void main(String[] args) {
 		BinarySearchST<String, Integer> st = new BinarySearchST<String, Integer>();
-		st.put("a", 1);
+		st.put("w", 1);
 		st.put("b", 1);
-		st.put("c", 1);
-		st.put("d", 1);
+		st.put("z", 1);
+		st.put("a", 1);
+		st.delete("b");
+		st.delete("w");
+		st.delete("z");
+		st.delete("a");
 		System.out.println(st.size());
 	}
 
