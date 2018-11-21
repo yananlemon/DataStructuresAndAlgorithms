@@ -1,5 +1,7 @@
 package algorithms.chapter3;
 
+import com.chapter4.text.MyQueue;
+
 /**
  * 基于二叉查找树的符号表
  * @author andy
@@ -76,12 +78,29 @@ public class BST<Key extends Comparable<Key>,Value> {
 	 * @return
 	 */
 	public double avgCompares(){
-		return length(root)/size(root) + 1;
+		return len(root)/size(root) + 1;
 	}
 	
+	private int len(Node n) {
+		int len = 0;
+		int level = 0;
+		MyQueue<Node> queue = new MyQueue<Node>();
+		queue.enqueue(n);
+		while(!queue.isEmpty()) {
+			Node currNode = queue.dequeue();
+			level++;
+			if(currNode.left != null) {
+				len += level;
+				queue.enqueue(currNode.left);
+			}
+			if(currNode.right != null) {
+				queue.enqueue(currNode.right);
+				len += level;
+			}
+		}
+		return len;
+	}
 	
-	
-
 	private int length(Node n) {
 		if( n == null)
 			return 0;
@@ -129,16 +148,16 @@ public class BST<Key extends Comparable<Key>,Value> {
 		bst.put("O", 15);
 		bst.put("N", 14);*/
 		BST<Integer, Integer> bst = new BST<Integer, Integer>();
-		bst.put(1, 1);
-		bst.put(10, 10);
-		bst.put(2, 2);
-		bst.put(9, 9);
-		bst.put(3, 3);
+		bst.put(10, 1);
+		bst.put(20, 10);
+		bst.put(30, 2);
+		//bst.put(9, 9);
+		/*bst.put(3, 3);
 		bst.put(8, 8);
 		bst.put(4, 8);
 		bst.put(7, 8);
 		bst.put(6, 8);
-		bst.put(5, 8);
+		bst.put(5, 8);*/
 		System.out.println(bst.size());
 		System.out.println(bst.get(10));
 		System.out.println("BST 高度为:"+bst.height());
