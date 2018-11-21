@@ -53,6 +53,57 @@ public class BST<Key extends Comparable<Key>,Value> {
 		return node;
 	}
 	
+	public Value get(Key key){
+		Node n = get(root,key);
+		if( n != null )
+			return n.val;
+		return null;
+	}
+	
+	private Node get(Node n, Key key) {
+		if( n == null )
+			return null;
+		int cmp = key.compareTo(n.key);
+		if( cmp == 0 )
+			return n;
+		if( cmp > 0 )
+			return get(n.right,key);
+		return get(n.left,key);
+	}
+	
+	/**
+	 * 习题3.2.7 计算二叉查找树一次随机命中查找平均所需的比较次数
+	 * @return
+	 */
+	public double avgCompares(){
+		return length(root)/size(root) + 1;
+	}
+	
+	
+	
+
+	private int length(Node n) {
+		if( n == null)
+			return 0;
+		return length(n.left) + length(n.right) + size(n) - 1;
+	}
+
+	/**
+	 * 习题3.2.6 递归计算二叉查找树的高度
+	 * @return 二叉查找树的高度(单个节点的二叉查找树的高度为1)
+	 */
+	public int height(){
+		return height(root);
+	}
+	
+	private int height(Node n){
+		if( n == null)
+			return 0;
+		int leftH = height(n.left);
+		int rightH = height(n.right);
+		return Math.max(leftH, rightH) + 1;
+	}
+	
 	public int size(){
 		return root.size;
 	}
@@ -64,7 +115,7 @@ public class BST<Key extends Comparable<Key>,Value> {
 	}
 
 	public static void main(String[] args) {
-		BST<String, Integer> bst = new BST<String, Integer>();
+		/*BST<String, Integer> bst = new BST<String, Integer>();
 		bst.put("E", 5);
 		bst.put("A", 1);
 		bst.put("S", 19);
@@ -76,7 +127,21 @@ public class BST<Key extends Comparable<Key>,Value> {
 		bst.put("T", 20);
 		bst.put("I", 9);
 		bst.put("O", 15);
-		bst.put("N", 14);
+		bst.put("N", 14);*/
+		BST<Integer, Integer> bst = new BST<Integer, Integer>();
+		bst.put(1, 1);
+		bst.put(10, 10);
+		bst.put(2, 2);
+		bst.put(9, 9);
+		bst.put(3, 3);
+		bst.put(8, 8);
+		bst.put(4, 8);
+		bst.put(7, 8);
+		bst.put(6, 8);
+		bst.put(5, 8);
 		System.out.println(bst.size());
+		System.out.println(bst.get(10));
+		System.out.println("BST 高度为:"+bst.height());
+		System.out.println("BST 平均比较次数:"+bst.avgCompares());
 	}
 }
