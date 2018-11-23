@@ -1,5 +1,4 @@
 package algorithms.chapter3;
-
 import com.chapter4.text.MyQueue;
 
 /**
@@ -11,8 +10,8 @@ import com.chapter4.text.MyQueue;
  */
 public class BST<Key extends Comparable<Key>,Value> {
 
-	private Node root;
-	private class Node{
+	public Node root;
+	public class Node{
 		Key key;		//键
 		Value val;		// 值
 		Node left,right;// 左子树,右子树
@@ -24,9 +23,53 @@ public class BST<Key extends Comparable<Key>,Value> {
 			this.size = n;
 			this.level = level;
 		}
+		public Key getKey() {
+			return key;
+		}
+		public void setKey(Key key) {
+			this.key = key;
+		}
+		public Value getVal() {
+			return val;
+		}
+		public void setVal(Value val) {
+			this.val = val;
+		}
+		public Node getLeft() {
+			return left;
+		}
+		public void setLeft(Node left) {
+			this.left = left;
+		}
+		public Node getRight() {
+			return right;
+		}
+		public void setRight(Node right) {
+			this.right = right;
+		}
+		public int getSize() {
+			return size;
+		}
+		public void setSize(int size) {
+			this.size = size;
+		}
+		public int getLevel() {
+			return level;
+		}
+		public void setLevel(int level) {
+			this.level = level;
+		}
+		
 		
 	}
 	
+	
+	
+	public BST() {
+
+	}
+	
+
 	public boolean isEmpty(){
 		return root.size == 0;
 	}
@@ -126,6 +169,36 @@ public class BST<Key extends Comparable<Key>,Value> {
 		return Math.max(leftH, rightH) + 1;
 	}
 	
+	/**
+	 * 习题3.2.37
+	 */
+	public void printLevel(){
+		MyQueue<Node> queue = new MyQueue<Node>();
+		queue.enqueue(root);
+		while( !queue.isEmpty() ){
+			Node n = queue.dequeue();
+			System.out.print(n.key+"->"+n.val+"\t");
+			while( !queue.isEmpty() ){
+				if( queue.firstEl().level == n.level ){
+					if(n.left != null )
+						queue.enqueue(n.left);
+					if(n.right != null )
+						queue.enqueue(n.right);
+					n = queue.dequeue();
+					System.out.print(n.key+"->"+n.val+"\t");
+				}else{
+					break;
+				}
+					
+			}
+			System.out.println();
+			if(n.left != null )
+				queue.enqueue(n.left);
+			if(n.right != null )
+				queue.enqueue(n.right);
+		}
+	}
+	
 	public int size(){
 		return root.size;
 	}
@@ -151,15 +224,24 @@ public class BST<Key extends Comparable<Key>,Value> {
 		bst.put("O", 15);
 		bst.put("N", 14);*/
 		BST<Integer, Integer> bst = new BST<Integer, Integer>();
-		bst.put(10, 1);
-		bst.put(20, 10);
-		bst.put(15, 2);
-		bst.put(14, 2);
+		bst.put(20, 1);
+		bst.put(15, 10);
+		bst.put(25, 2);
+		bst.put(10, 2);
+		bst.put(18, 2);
+		bst.put(9, 2);
+		bst.put(12, 2);
 		bst.put(16, 2);
+		bst.put(19, 2);
+		bst.put(22, 2);
+		bst.put(26, 2);
+		bst.put(24, 2);
 		System.out.println(bst.size());
 		System.out.println(bst.get(10));
 		System.out.println("BST 高度为:"+bst.height());
 		System.out.println("BST 内部路径长度为:"+bst.ipl());
 		System.out.println("BST 平均比较次数:"+bst.avgCompares());
+		System.out.println("按照层级打印:");
+		bst.printLevel();
 	}
 }
