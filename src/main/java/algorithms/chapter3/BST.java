@@ -1,5 +1,8 @@
 package algorithms.chapter3;
+import com.chapter3.text.DoublyLinkedList;
 import com.chapter4.text.MyQueue;
+
+import algorithms.chapter3.practice.BinaryTreeViewer;
 
 /**
  * 基于二叉查找树的符号表
@@ -208,6 +211,229 @@ public class BST<Key extends Comparable<Key>,Value> {
 			return 0;
 		return node.size;
 	}
+	
+	public Key min() {
+		Node n = min(root);
+		return n.key;
+	}
+
+	private Node min(Node root) {
+		if( root.left == null)
+			return root;
+		else
+			return min(root.left);
+	}
+	
+	public Key max() {
+		Node n = max(root);
+		return n.key;
+	}
+
+	private Node max(Node root) {
+		if( root.right == null)
+			return root;
+		else
+			return max(root.right);
+	}
+	
+	public Key minUseRecursion() {
+		Node rs = root;
+		while( rs.left != null ) {
+			rs = rs.left;
+		}
+		return rs.key;
+	}
+	
+	public Key maxUseRecursion() {
+		Node rs = root;
+		while( rs.right != null ) {
+			rs = rs.right;
+		}
+		return rs.key;
+	}
+	
+	/**
+	 * 返回小于等于{@code key}的最大键
+	 * @return
+	 */
+	public Key floor(Key key) {
+		Node n = floor(root,key);
+		return n.key;
+	}
+	
+	private Node floor(Node n,Key key) {
+		if( n == null)
+			return null;
+		int cmp = key.compareTo(n.key);
+		if( cmp == 0)
+			return n;
+		else if( cmp < 0 )
+			return floor(n.left,key);
+		else {
+			Node r = floor(n.right,key);
+			if( r == null )
+				return n;
+			else
+				return r;
+		}
+	}
+	
+	public Key floorUseRecursion(Key key) {
+		Node t = root;
+		Node result = null;
+		while( true ) {
+			int cmp = key.compareTo(t.key);
+			if( cmp == 0)
+				return t.key;
+			else if( cmp < 0 ) {
+				if( result != null && t.left == null)
+					return result.key;
+				else
+					t = t.left;
+			}
+			else {
+				if( t.right == null)
+					return t.key;
+				else {
+					result = t;
+					t = t.right;
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 返回大于等于{@code key}的最小键
+	 * @return
+	 */
+	public Key ceiling(Key key) {
+		Node n = ceiling(root,key);
+		return n.key;
+	}
+	
+	private Node ceiling(Node n,Key key) {
+		if( n == null)
+			return null;
+		int cmp = key.compareTo(n.key);
+		if( cmp == 0)
+			return n;
+		else if( cmp > 0 )
+			return ceiling(n.right,key);
+		else {
+			Node l = ceiling(n.left,key);
+			return l == null ? n : l;
+		}
+	}
+	
+	public Key ceilingUseRecursion(Key key) {
+		Node t = root;
+		Node result = null;
+		while( true ) {
+			int cmp = key.compareTo(t.key);
+			if( cmp == 0)
+				return t.key;
+			else if( cmp < 0 ) {
+				
+				if( t.left == null)
+					return t.key;
+				else {
+					result = t;
+					t = t.left;
+				}
+			}
+			else {
+				if( result != null && t.right == null)
+					return result.key;
+				else
+					t = t.right;
+			}
+		}
+	}
+	
+	/**
+	 * 返回小于{@code key}的键的数量
+	 * @param key
+	 * @return
+	 */
+	public int rank(Key key) {
+		return rank(root,key);
+	}
+	
+	private int rank(Node n,Key key) {
+		if( n == null)
+			return 0;
+		int cmp = n.key.compareTo(key);
+		if( cmp < 0 ) {
+			return (n.left == null? 0 :n.left.size) + 1 + rank(n.right,key);
+		}
+		else if( cmp > 0 )
+			return rank(n.left,key);
+		return rank(n.left,key);
+	}
+	
+	public int rankUseRecursion(Key key) {
+		int count = 0;
+		Node n = root;
+		while( n != null ) {
+			int cmp = n.key.compareTo(key);
+			if( cmp < 0 ) {
+				count += (n.left == null? 0 :n.left.size) + 1;
+				n = n.right;
+			}
+			else if( cmp > 0 )
+				n = n.left;
+			else {
+				n = n.left;
+			}
+		}
+		return count;
+	}
+	
+	/**
+	 * 返回排名为{@code k}的键
+	 * @param k
+	 * @return
+	 */
+	public Key select(int k) {
+		Node n = select(root, k);
+		return n == null ? null : n.key;
+	}
+	
+	
+	private Node select(Node n,int k) {
+		if( n == null )
+			return null;
+		int t = size(n.left);
+		if( t > k )
+			return select(n.left,k);
+		else if( t < k)
+			return select(n.right,k-t-1);
+		else
+			return n;
+	}
+	
+	public Key selectUseRecursion(int k) {
+		Node n = root;
+		while( true ) {
+			int t = size(n.left);
+			if( t > k)
+				n = n.left;
+			else if( t < k ) {
+				n = n.right;
+				k -= t+1;
+			}
+			else
+				return n == null ? null : n.key;
+		}
+	}
+	
+	public void preOrder(Node n) {
+		if( n == null)
+			return;
+		preOrder(n.left);
+		System.out.println(n.key);
+		preOrder(n.right);
+	}
 
 	public static void main(String[] args) {
 		/*BST<String, Integer> bst = new BST<String, Integer>();
@@ -226,7 +452,7 @@ public class BST<Key extends Comparable<Key>,Value> {
 		BST<Integer, Integer> bst = new BST<Integer, Integer>();
 		bst.put(20, 1);
 		bst.put(15, 10);
-		bst.put(25, 2);
+		bst.put(30, 2);
 		bst.put(10, 2);
 		bst.put(18, 2);
 		bst.put(9, 2);
@@ -243,5 +469,15 @@ public class BST<Key extends Comparable<Key>,Value> {
 		System.out.println("BST 平均比较次数:"+bst.avgCompares());
 		System.out.println("按照层级打印:");
 		bst.printLevel();
+		BinaryTreeViewer<Integer, Integer> viewer = new BinaryTreeViewer<Integer, Integer>(bst);
+		viewer.refresh();
+		System.out.println("floor(23):"+bst.floor(23));//22
+		System.out.println("floorUseRecursion(23)"+bst.floorUseRecursion(23));
+		System.out.println("ceiling(17):"+bst.ceiling(17));//24
+		System.out.println("ceilingUseRecursion(17):"+bst.ceilingUseRecursion(17));//24
+		System.out.println("rank(19):"+bst.rank(19));//5
+		System.out.println("rankUseRecursion(19):"+bst.rankUseRecursion(19));
+		System.out.println("select(5):"+bst.select(1));
+		System.out.println("selectUseRecursion(5):"+bst.selectUseRecursion(1));
 	}
 }
