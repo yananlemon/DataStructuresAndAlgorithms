@@ -2,6 +2,7 @@ package algorithms.chapter3;
 import algorithms.chapter3.practice.BinaryTreeViewer;
 
 import com.chapter4.text.MyQueue;
+import com.chapter4.text.StackL;
 
 /**
  * 基于二叉查找树的符号表
@@ -149,6 +150,50 @@ public class BST<Key extends Comparable<Key>,Value> {
 		return node;
 	}
 	
+	/**
+	 * 习题3.2.13 基于迭代版本的put
+	 * @param key
+	 * @param val
+	 */
+	public void putUseItertor(Key key,Value val) {
+		Node t = root;
+		Node n = null;
+		StackL<Node> searchPathStack = new StackL<Node>();
+		while( t != null ) {
+			searchPathStack.push(t);
+			int cmp = key.compareTo(t.key);
+			if( cmp == 0){
+				t.val = val;
+				return;
+			}
+			else if( cmp > 0 ) {
+				if( t.right == null )
+					n = new Node(key, val, 1, t.level + 1);
+				if( n != null) {
+					t.right = n;
+					t.size = size(t.left) + size(t.right) + 1;
+					break;
+				}
+				t = t.right;
+			}else {
+				if( t.left == null )
+					n = new Node(key, val, 1, t.level + 1);
+				if( n != null) {
+					t.left = n;
+					t.size = size(t.left) + size(t.right) + 1;
+					break;
+				}
+				t = t.left;
+			}
+		}
+		// 更新节点size
+		while( !searchPathStack.isEmpty()) {
+			Node temp = searchPathStack.pop();
+			temp.size = size(temp.left) + size(temp.right) + 1;
+		}
+		
+	}
+	
 	public Value get(Key key){
 		Node n = get(root,key);
 		if( n != null )
@@ -216,6 +261,25 @@ public class BST<Key extends Comparable<Key>,Value> {
 		int leftH = height(n.left);
 		int rightH = height(n.right);
 		return Math.max(leftH, rightH) + 1;
+	}
+	
+	/**
+	 * 习题3.2.13 基于迭代的get实现
+	 * @param key
+	 * @return
+	 */
+	public Value getUseIterator(Key key) {
+		Node t = root;
+		while( t != null ) {
+			int cmp = key.compareTo(t.key);
+			if( cmp == 0 )
+				return t.val;
+			else if( cmp > 0 )
+				t = t.right;
+			else
+				t= t.left;
+		}
+		return null;
 	}
 	
 	/**
@@ -525,6 +589,11 @@ public class BST<Key extends Comparable<Key>,Value> {
 		System.out.println("select(5):"+bst.select(1));
 		System.out.println("selectUseRecursion(5):"+bst.selectUseRecursion(1));
 		bst.delete(15);
+		System.out.println("get with recursion:"+bst.get(24));
+		System.out.println("get with itertor:"+bst.getUseIterator(24));
+		bst.putUseItertor(50, 2);
+		bst.putUseItertor(25, 2);
+		//bst.put(11, 11);
 		BinaryTreeViewer<Integer, Integer> viewer = new BinaryTreeViewer<Integer, Integer>(bst);
 		viewer.refresh();
 	}
