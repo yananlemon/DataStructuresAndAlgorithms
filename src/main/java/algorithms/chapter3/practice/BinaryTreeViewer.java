@@ -55,7 +55,6 @@ public class BinaryTreeViewer<Key extends Comparable<Key>,Value> extends JPanel{
     protected Font font = new Font("Roman", 0, 14);
 	private void draw(Graphics g,int minX,int maxX,int y,int yStep,BST<Key,Value>.Node n){
 		String s = n.getKey().toString();
-        System.out.println(s);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
         int width = fm.stringWidth(s);

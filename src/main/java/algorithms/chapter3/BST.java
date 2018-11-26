@@ -1,8 +1,7 @@
 package algorithms.chapter3;
-import com.chapter3.text.DoublyLinkedList;
-import com.chapter4.text.MyQueue;
-
 import algorithms.chapter3.practice.BinaryTreeViewer;
+
+import com.chapter4.text.MyQueue;
 
 /**
  * 基于二叉查找树的符号表
@@ -77,6 +76,53 @@ public class BST<Key extends Comparable<Key>,Value> {
 		return root.size == 0;
 	}
 	
+	public void delete(Key key){
+		root = delete(root,key);
+		
+	}
+	
+	private Node delete(Node x, Key key) {
+		int cmp = key.compareTo(x.key);
+		if( cmp > 0 )
+			x.right = delete(x.right,key);
+		if( cmp < 0 )
+			x.left = delete(x.left,key);
+		// x为即将删除的节点
+		if( cmp == 0){
+			if( x.left == null )
+				return x.right;
+			if( x.right == null )
+				return x.left;
+			// x存在左右两棵子树
+			if( x.left !=null && x.right != null ){
+				// 获取x右子树中最小的节点
+				Node min = min(x.right);
+				// 将min的值赋值给x
+				x.key = min.key;
+				x.val = min.val;
+				// 删除x右子树中最小的节点
+				x.right = deleteMin(x.right);
+			}
+		}
+		x.size = size(x.left) + size(x.right) + 1;
+		return x;
+	}
+	
+	public void deleteMin(){
+		deleteMin(root);
+	}
+	
+
+
+	private Node deleteMin(Node n) {
+		if( n.left == null)
+			return n.right;
+		n.left = deleteMin(n.left);
+		n.size = size(n.left) + size(n.right) + 1;
+		return n;
+	}
+
+
 	public void put(Key key,Value val){
 		root = put(root,key,val,0);
 			
@@ -469,8 +515,7 @@ public class BST<Key extends Comparable<Key>,Value> {
 		System.out.println("BST 平均比较次数:"+bst.avgCompares());
 		System.out.println("按照层级打印:");
 		bst.printLevel();
-		BinaryTreeViewer<Integer, Integer> viewer = new BinaryTreeViewer<Integer, Integer>(bst);
-		viewer.refresh();
+		//viewer.refresh();
 		System.out.println("floor(23):"+bst.floor(23));//22
 		System.out.println("floorUseRecursion(23)"+bst.floorUseRecursion(23));
 		System.out.println("ceiling(17):"+bst.ceiling(17));//24
@@ -479,5 +524,8 @@ public class BST<Key extends Comparable<Key>,Value> {
 		System.out.println("rankUseRecursion(19):"+bst.rankUseRecursion(19));
 		System.out.println("select(5):"+bst.select(1));
 		System.out.println("selectUseRecursion(5):"+bst.selectUseRecursion(1));
+		bst.delete(15);
+		BinaryTreeViewer<Integer, Integer> viewer = new BinaryTreeViewer<Integer, Integer>(bst);
+		viewer.refresh();
 	}
 }
