@@ -2,6 +2,7 @@ package algorithms.chapter3;
 import algorithms.chapter3.practice.BinaryTreeViewer;
 
 import com.chapter4.text.MyQueue;
+import com.chapter4.text.QueueS;
 import com.chapter4.text.StackL;
 
 /**
@@ -544,6 +545,37 @@ public class BST<Key extends Comparable<Key>,Value> {
 		System.out.println(n.key);
 		preOrder(n.right);
 	}
+	
+	public Iterable<Key> keys(){
+		MyQueue<Key> queue = new MyQueue<Key>();
+		keys(root,queue);
+		return queue;
+	}
+	
+	private void keys(Node n,MyQueue<Key> queue) {
+		if( n == null)
+			return;
+		keys(n.left,queue);
+		queue.enqueue(n.key);
+		keys(n.right,queue);
+		
+	}
+
+
+	/**
+	 * 习题3.2.33
+	 * @return
+	 */
+	public boolean check(){
+		for( int i = 0; i< size() - 1; i++ )
+			if( i != rank(select(i)))
+				return false;
+		for (Key key : keys()) {
+			if( !key.equals(select(rank(key))))
+				return false;
+		}
+		return true;
+	}
 
 	public static void main(String[] args) {
 		/*BST<String, Integer> bst = new BST<String, Integer>();
@@ -594,7 +626,12 @@ public class BST<Key extends Comparable<Key>,Value> {
 		bst.putUseItertor(50, 2);
 		bst.putUseItertor(25, 2);
 		//bst.put(11, 11);
+		System.out.println("check():"+bst.check());
 		BinaryTreeViewer<Integer, Integer> viewer = new BinaryTreeViewer<Integer, Integer>(bst);
 		viewer.refresh();
+		System.out.println("keys:");
+		for (Integer key : bst.keys()) {
+			System.out.println(key);
+		}
 	}
 }

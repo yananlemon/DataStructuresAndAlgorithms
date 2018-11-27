@@ -1,5 +1,7 @@
 package com.chapter4.text;
 
+import java.util.Iterator;
+
 import com.chapter3.text.DoublyLinkedList;
 
 /**
@@ -8,7 +10,7 @@ import com.chapter3.text.DoublyLinkedList;
  * @author yanan  
  * @date 2018年3月29日
  */
-public class MyQueue<T> {
+public class MyQueue<T> implements Iterable<T>{
 
 	private DoublyLinkedList<T> dll;
 	
@@ -66,6 +68,32 @@ public class MyQueue<T> {
 		}
 		sb.deleteCharAt(sb.length()-1).append("]");
 		return sb.toString();
+	}
+
+	public Iterator<T> iterator() {
+		return new QueueIterator(dll);
+	}
+	
+	private class QueueIterator implements Iterator<T>{
+
+		int index;
+		DoublyLinkedList<T> dll;
+		QueueIterator(DoublyLinkedList<T> dll){
+			this.dll = dll;
+		}
+		
+		public boolean hasNext() {
+			return index < this.dll.size();
+		}
+
+		public T next() {
+			return dll.get(index++);
+		}
+		
+		public void remove() {
+            throw new UnsupportedOperationException();
+        }
+		
 	}
 	
 	
