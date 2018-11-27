@@ -2,7 +2,6 @@ package algorithms.chapter3;
 import algorithms.chapter3.practice.BinaryTreeViewer;
 
 import com.chapter4.text.MyQueue;
-import com.chapter4.text.QueueS;
 import com.chapter4.text.StackL;
 
 /**

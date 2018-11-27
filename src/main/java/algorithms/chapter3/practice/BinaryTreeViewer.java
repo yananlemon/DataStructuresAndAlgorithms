@@ -84,7 +84,7 @@ public class BinaryTreeViewer<Key extends Comparable<Key>,Value> extends JPanel{
 		BST<Integer, Integer> bst = new BST<Integer, Integer>();
 		bst.put(20, 1);
 		bst.put(15, 10);
-		bst.put(25, 2);
+		bst.put(30, 2);
 		bst.put(10, 2);
 		bst.put(18, 2);
 		bst.put(9, 2);
