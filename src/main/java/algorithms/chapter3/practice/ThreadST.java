@@ -1,7 +1,5 @@
 package algorithms.chapter3.practice;
 
-import algorithms.chapter3.BST.Node;
-
 import com.chapter4.text.MyQueue;
 
 
@@ -24,13 +22,63 @@ public class ThreadST<Key extends Comparable<Key>,Value> {
 	}
 	
 	public void delete(Key key) {
+		root = delete(root, key);
+		balanceNodeInfo();
+	}
+	
+	private Node delete(Node n,Key key) {
+		if( n == null)
+			return null;
+		int cmp = key.compareTo(n.key);
+		if( cmp > 0 )
+			n.right =  delete(n.right,key);
+		else if( cmp < 0 )
+			n.left = delete(n.left,key);
+		else {
+			if( n.left == null )
+				return n.right;
+			if( n.right == null )
+				return n.left;
+			Node min = min(n.right);
+			n.key = min.key;
+			n.val = min.val;
+			n.right = deleteMin(n.right);
+		}
+		n.size = size(n.left) + size(n.right) + 1;
+		return n;
 	}
 
 	public void deleteMin() {
+		root = deleteMin(root);
+	}
+
+	private Node deleteMin(Node n) {
+		if( n.left == null )
+			return n.right;
+		n.left = deleteMin(n.left);
+		n.size = size(n.left) + size(n.right) + 1;
+		return n;
 	}
 
 	public void put(Key key,Value val){
 		root = put(root,key,val,0);
+		balanceNodeInfo();
+	}
+
+	private void balanceNodeInfo() {
+		for(Key k : keys() ) {
+			Node node = get(root, k);
+			// 获取node的排名
+			int rank = rank(node.key);
+			if( rank > 0 && rank < root.size ) {
+				node.succ = select(rank + 1);
+				node.pred = select(rank - 1);
+			}
+			if( rank == 0)
+				node.succ = select(rank + 1);
+			if( rank == root.size - 1)
+				node.pred = select(rank - 1);
+		}
 	}
 
 	private Node put(Node node, Key key, Value val,int level) {
@@ -52,18 +100,9 @@ public class ThreadST<Key extends Comparable<Key>,Value> {
 			
 			
 		}
+		
 		node.size = size(node.left) + size(node.right) + 1;
-		update(node);
 		return node;
-	}
-	
-	private void update(Node n){
-		if( n == null )
-			return;
-		Node pred = n.left != null ? n.left : null;
-		n.pred = pred == null ? null :pred.key;
-		Node succ = n.right != null ? n.right : null;
-		n.succ = succ == null ? null : succ.key;
 	}
 	
 	/**
@@ -213,11 +252,16 @@ public class ThreadST<Key extends Comparable<Key>,Value> {
 		bst.put(22, 2);
 		bst.put(26, 2);
 		bst.put(24, 2);
-		System.out.println("20的上一个键是:"+bst.prev(20));
-		System.out.println("20的下一个键是:"+bst.next(20));
-		
-		System.out.println("15的上一个键是:"+bst.prev(15));
-		System.out.println("15的下一个键是:"+bst.next(15));
+		System.out.println("添加之后，各个key对应的前驱和后继节点如下：");
+		for(Integer key : bst.keys() ) {
+			System.out.printf("Key:%d,prev key :%d,next key:%d\n",key,bst.prev(key),bst.next(key));
+		}
+		bst.delete(20);
+		bst.delete(24);
+		System.out.println("删除若干key之后，各个key对应的前驱和后继节点如下：");
+		for(Integer key : bst.keys() ) {
+			System.out.printf("Key:%d,prev key :%d,next key:%d\n",key,bst.prev(key),bst.next(key));
+		}
 	}
 	
 }
