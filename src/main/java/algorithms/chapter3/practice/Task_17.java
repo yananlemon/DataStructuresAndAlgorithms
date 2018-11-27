@@ -19,7 +19,7 @@ public class Task_17<Key,Value> {
 		bst.put("O", 1);
 		bst.put("N", 1);
 		bst.printLevel();
-		bst.delete("E");
+		/*bst.delete("E");
 		bst.delete("I");
 		bst.delete("N");
 		bst.delete("O");
@@ -28,7 +28,10 @@ public class Task_17<Key,Value> {
 		bst.delete("T");
 		bst.delete("U");
 		bst.delete("Y");
-		bst.delete("A");
+		bst.delete("A");*/
+		bst.delete("N");
+		bst.delete("U");
+		bst.delete("E");
 		BinaryTreeViewer<String, Integer> viewer = new BinaryTreeViewer<String, Integer>(bst);
 		viewer.refresh();
 	}
