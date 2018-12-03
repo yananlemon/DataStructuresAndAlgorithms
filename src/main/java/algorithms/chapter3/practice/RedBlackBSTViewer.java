@@ -83,9 +83,9 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 
 	public static void main(String[] args) {
 		RedBlackBST<String, Integer> bst = new RedBlackBST<String, Integer>();
-		for( char c = 'A';c <= 'Z';c++) {
+		/*for( char c = 'A';c <= 'Z';c++) {
 			bst.put(String.valueOf(c), 1);
-		}
+		}*/
 		/*bst.put("A", 1);
 		bst.put("C", 1);
 		bst.put("E", 1);
@@ -96,8 +96,16 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 		bst.put("R", 1);
 		bst.put("S", 1);
 		bst.put("X", 1);*/
+		bst.put("E", 1);
+		bst.put("C", 1);
+		bst.put("S", 1);
+		bst.put("R", 1);
+		bst.put("A", 1);
+		bst.put("H", 1);
+		//bst.put("H", 1);
 		RedBlackBSTViewer<String, Integer> viewer = 
 				new RedBlackBSTViewer<String, Integer>(bst);
 		viewer.refresh();
 	}
 }
+
