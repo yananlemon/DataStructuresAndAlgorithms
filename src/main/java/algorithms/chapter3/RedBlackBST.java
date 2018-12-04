@@ -249,7 +249,7 @@ public class RedBlackBST<Key extends Comparable<Key>,Value> {
 	public void delete(Key key){
 		
 		// 如果根节点的左右子节点都是黑色,那么设置根节点为红色
-		if (!isRed(root.left) && !isRed(root.right))
+		if ( !isRed(root.left) && !isRed(root.right) )
 			root.color = RED;
 		root = delete(root, key);
 		if (!isEmpty()) 

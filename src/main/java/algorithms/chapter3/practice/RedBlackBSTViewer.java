@@ -91,10 +91,10 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 	}
 
 	public static void main(String[] args) {
-		RedBlackBST<Integer, Integer> bst = new RedBlackBST<Integer, Integer>();
-		for( int i = 1; i <= 100; i++) {
+		RedBlackBST<String, Integer> bst = new RedBlackBST<String, Integer>();
+		/*for( int i = 1; i <= 100; i++) {
 			bst.put(i, 1);
-		}
+		}*/
 		/*bst.put("A", 1);
 		bst.put("C", 1);
 		bst.put("E", 1);
@@ -105,15 +105,19 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 		bst.put("R", 1);
 		bst.put("S", 1);
 		bst.put("X", 1);*/
-		/*bst.put("E", 1);
+		bst.put("E", 1);
 		bst.put("C", 1);
 		bst.put("S", 1);
 		bst.put("R", 1);
 		bst.put("A", 1);
-		bst.put("H", 1);*/
+		bst.put("H", 1);
 		//bst.put("H", 1);
-		RedBlackBSTViewer<Integer, Integer> viewer = 
-				new RedBlackBSTViewer<Integer, Integer>(bst);
+		//bst.delete("S");
+		//bst.delete("R");
+		bst.deleteMax();
+		bst.deleteMax();
+		RedBlackBSTViewer<String, Integer> viewer = 
+				new RedBlackBSTViewer<String, Integer>(bst);
 		viewer.refresh();
 		System.out.println("是否是2-3树:"+ bst.is23());
 		System.out.println("是否是2-3树:"+ bst.is23());
