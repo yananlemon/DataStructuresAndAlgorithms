@@ -110,7 +110,7 @@ public class BST<Key extends Comparable<Key>,Value> {
 	}
 	
 	public void deleteMin(){
-		deleteMin(root);
+		root = deleteMin(root);
 	}
 	
 

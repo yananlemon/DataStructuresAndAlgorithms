@@ -1,11 +1,17 @@
 package algorithms.chapter3.practice;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-import algorithms.chapter3.BST;
 import algorithms.chapter3.RedBlackBST;
 
 public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel{
@@ -13,11 +19,10 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 	RedBlackBST<Key, Value> tree;
 	private int maxHeight;
 
-
 	public RedBlackBSTViewer(RedBlackBST<Key, Value> root){
 		setBackground(Color.white);
 		setForeground(Color.black);
-		JFrame f = new JFrame("BinaryTree View");
+		JFrame f = new JFrame("左倾红黑树");
 		f.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent e) {
 				System.exit(0);
@@ -54,6 +59,7 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 	} 
 	/* The font for the tree nodes. */
     protected Font font = new Font("Roman", 0, 14);
+    
 	private void draw(Graphics g,int minX,int maxX,int y,int yStep,RedBlackBST<Key,Value>.Node n){
 		String s = n.getKey().toString();
         g.setFont(font);
@@ -63,7 +69,10 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 
         int xSep = Math.min((maxX - minX)/8, 10);
         g.drawString(s, (minX + maxX)/2 - width/2, y + yStep/2);
-
+        if( n.getLeft() != null && n.getLeft().isColor() )
+        	g.setColor(Color.red);
+        	else
+        		g.setColor(Color.black);
         if (n.getLeft() != null) {
             // if left tree not empty, draw line to it and recursively
             // draw that tree
@@ -82,10 +91,10 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 	}
 
 	public static void main(String[] args) {
-		RedBlackBST<String, Integer> bst = new RedBlackBST<String, Integer>();
-		/*for( char c = 'A';c <= 'Z';c++) {
-			bst.put(String.valueOf(c), 1);
-		}*/
+		RedBlackBST<Integer, Integer> bst = new RedBlackBST<Integer, Integer>();
+		for( int i = 1; i <= 100; i++) {
+			bst.put(i, 1);
+		}
 		/*bst.put("A", 1);
 		bst.put("C", 1);
 		bst.put("E", 1);
@@ -96,16 +105,18 @@ public class RedBlackBSTViewer<Key extends Comparable<Key>,Value> extends JPanel
 		bst.put("R", 1);
 		bst.put("S", 1);
 		bst.put("X", 1);*/
-		bst.put("E", 1);
+		/*bst.put("E", 1);
 		bst.put("C", 1);
 		bst.put("S", 1);
 		bst.put("R", 1);
 		bst.put("A", 1);
-		bst.put("H", 1);
+		bst.put("H", 1);*/
 		//bst.put("H", 1);
-		RedBlackBSTViewer<String, Integer> viewer = 
-				new RedBlackBSTViewer<String, Integer>(bst);
+		RedBlackBSTViewer<Integer, Integer> viewer = 
+				new RedBlackBSTViewer<Integer, Integer>(bst);
 		viewer.refresh();
+		System.out.println("是否是2-3树:"+ bst.is23());
+		System.out.println("是否是2-3树:"+ bst.is23());
 	}
 }
 
