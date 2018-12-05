@@ -7,15 +7,13 @@ package com.chapter6.navl;
  */
 public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 	
-	private AvlNode<AnyType> root;//根节点
-	
-	
+	public AvlNode<AnyType> root;//根节点
 
 	public AvlNode<AnyType> getRoot() {
 		return root;
 	}
 
-	private static class AvlNode<AnyType>{
+	public class AvlNode<AnyType>{
 		private AnyType 			element;	//数据
 		private AvlNode<AnyType> 	left;		//左子树
 		private AvlNode<AnyType> 	right;		//右子树
@@ -30,6 +28,39 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		public AvlNode(AnyType element) {
 			this(element, null, null);
 		}
+
+		public AnyType getElement() {
+			return element;
+		}
+
+		public void setElement(AnyType element) {
+			this.element = element;
+		}
+
+		public AvlNode<AnyType> getLeft() {
+			return left;
+		}
+
+		public void setLeft(AvlNode<AnyType> left) {
+			this.left = left;
+		}
+
+		public AvlNode<AnyType> getRight() {
+			return right;
+		}
+
+		public void setRight(AvlNode<AnyType> right) {
+			this.right = right;
+		}
+
+		public int getHeight() {
+			return height;
+		}
+
+		public void setHeight(int height) {
+			this.height = height;
+		}
+		
 		
 	}
 	
@@ -138,6 +169,10 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		
 	}
 
+	public int height() {
+		return height(root);
+	}
+	
 	private int height(AvlNode<AnyType> t) {
 		return t == null ? 0 : t.height;
 	}
@@ -300,7 +335,9 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		}
 		return Math.max(calDepth(root.left), calDepth(root.right))+1;
 	}
-	
+	public boolean isAVL() {
+		return isAVLTree(root);
+	}
 	boolean isAVLTree(AvlNode<AnyType> root) {
 		if(root == null) {
 			return true;
