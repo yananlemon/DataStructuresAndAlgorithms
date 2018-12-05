@@ -187,6 +187,8 @@ public class AVLBST<Key extends Comparable<Key>,Value> {
 		Node x = h.right;
 		h.right = x.left;
 		x.left = h;
+		x.height = Math.max(height(x.left), height(x.right)) + 1;
+		h.height = Math.max(height(h.left), height(h.right)) + 1;
 		return x;
 	}
 	
@@ -199,6 +201,8 @@ public class AVLBST<Key extends Comparable<Key>,Value> {
 		Node x = h.left;
 		h.left = x.right;
 		x.right = h;
+		x.height = Math.max(height(x.left), height(x.right)) + 1;
+		h.height = Math.max(height(h.left), height(h.right)) + 1;
 		return x;
 	}
 	

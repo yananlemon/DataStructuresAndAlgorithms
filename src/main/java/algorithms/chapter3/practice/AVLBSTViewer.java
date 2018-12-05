@@ -93,10 +93,10 @@ public class AVLBSTViewer<Key extends Comparable<Key>,Value> extends JPanel{
 		avl.put("R", 1);
 		avl.put("B", 1);
 		avl.put("A", 1);
-		//avl.put("C", 1);
-		//avl.put("G", 1);
-		//avl.put("H", 1);
-		//avl.put("I", 1);
+		avl.put("C", 1);
+		avl.put("G", 1);
+		avl.put("H", 1);
+		avl.put("I", 1);
 		//avl.delete("E");
 		//avl.delete("E");
 		AVLBSTViewer<String, Integer> viewer = 
