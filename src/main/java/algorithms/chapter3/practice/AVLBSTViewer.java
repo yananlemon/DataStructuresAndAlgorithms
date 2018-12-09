@@ -61,7 +61,7 @@ public class AVLBSTViewer<Key extends Comparable<Key>,Value> extends JPanel{
     protected Font font = new Font("Roman", 0, 14);
     
 	private void draw(Graphics g,int minX,int maxX,int y,int yStep,AVLBST<Key,Value>.Node n){
-		String s = n.getKey().toString() + " ,bf:" + tree.bf(n);
+		String s = n.getKey().toString() + " ,bf:" + tree.balanceFactor(n);
         g.setFont(font);
         FontMetrics fm = g.getFontMetrics();
         int width = fm.stringWidth(s);
@@ -87,21 +87,40 @@ public class AVLBSTViewer<Key extends Comparable<Key>,Value> extends JPanel{
 	}
 
 	public static void main(String[] args) {
-		AVLBST<String, Integer> avl = new AVLBST<String, Integer>();
-		avl.put("E", 1);
-		avl.put("F", 1);
-		avl.put("R", 1);
+		AVLBST<Integer, Integer> avl = new AVLBST<Integer, Integer>();
+		/*avl.put("F", 1);
 		avl.put("B", 1);
-		avl.put("A", 1);
-		avl.put("C", 1);
+		avl.put("M", 1);
 		avl.put("G", 1);
-		avl.put("H", 1);
-		avl.put("I", 1);
+		avl.put("H", 1);*/
 		//avl.delete("E");
 		//avl.delete("E");
-		AVLBSTViewer<String, Integer> viewer = 
-				new AVLBSTViewer<String, Integer>(avl);
-		viewer.refresh();
+		for( int i = 0; i < 10000; i++)
+			avl.put(i, i);
+		/*avl.put(0, 0);
+		avl.put(1, 1);
+		avl.put(2, 2);
+		avl.put(3, 3);
+		avl.put(4, 4);
+		avl.put(5, 5);
+		avl.put(6, 6);
+		avl.put(7, 6);
+		avl.put(8, 6);
+		avl.put(9, 6);
+		avl.put(10, 10);*/
+		avl.delete(56);
+		avl.delete(55);
+		avl.delete(5700);
+		avl.deleteMin();
+		System.out.println("findMin:"+avl.findMin());
+		System.out.println("findMax:"+avl.findMax());
+		avl.deleteMax();
+		System.out.println("findMax:"+avl.findMax());
+		//AVLBSTViewer<Integer, Integer> viewer = 
+		//		new AVLBSTViewer<Integer, Integer>(avl);
+		//viewer.refresh();
+		System.out.println("是AVL树吗？"+avl.isAVL());
+		System.out.println("height:" + avl.height());
 		
 	}
 }
