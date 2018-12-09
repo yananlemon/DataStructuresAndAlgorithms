@@ -95,9 +95,9 @@ public class AVLBSTViewer<Key extends Comparable<Key>,Value> extends JPanel{
 		avl.put("H", 1);*/
 		//avl.delete("E");
 		//avl.delete("E");
-		for( int i = 0; i < 10000; i++)
+		/*for( int i = 0; i < 10000; i++)
 			avl.put(i, i);
-		/*avl.put(0, 0);
+		avl.put(0, 0);
 		avl.put(1, 1);
 		avl.put(2, 2);
 		avl.put(3, 3);
@@ -107,18 +107,25 @@ public class AVLBSTViewer<Key extends Comparable<Key>,Value> extends JPanel{
 		avl.put(7, 6);
 		avl.put(8, 6);
 		avl.put(9, 6);
-		avl.put(10, 10);*/
+		avl.put(10, 10);
 		avl.delete(56);
 		avl.delete(55);
 		avl.delete(5700);
 		avl.deleteMin();
 		System.out.println("findMin:"+avl.findMin());
 		System.out.println("findMax:"+avl.findMax());
-		avl.deleteMax();
+		avl.deleteMax();*/
+		avl.put(10, 1);
+		avl.put(20, 1);
+		avl.put(30, 1);
+		avl.put(19, 1);
+		avl.put(15, 1);
+		avl.put(25, 1);
+		avl.put(27, 1);
 		System.out.println("findMax:"+avl.findMax());
-		//AVLBSTViewer<Integer, Integer> viewer = 
-		//		new AVLBSTViewer<Integer, Integer>(avl);
-		//viewer.refresh();
+		AVLBSTViewer<Integer, Integer> viewer = 
+				new AVLBSTViewer<Integer, Integer>(avl);
+		viewer.refresh();
 		System.out.println("是AVL树吗？"+avl.isAVL());
 		System.out.println("height:" + avl.height());
 		
